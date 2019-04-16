@@ -1,6 +1,6 @@
 package main;
 
-import gui.FirstClass;
+import algorithm.FirstClass;
 
 public class Main {
 	public static void main (String[] args) {
