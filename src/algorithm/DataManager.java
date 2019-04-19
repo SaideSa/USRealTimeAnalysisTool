@@ -30,3 +30,27 @@ public static Image toBufferedImage(Mat m) {
 
     return image;
 }}
+
+
+// FPS anzeigen lassen:
+/*VideoCapture videoCapture = new VideoCapture();
+videoCapture.open("c:/movies/mymovie.mp4");
+double fps = videoCapture.get(Videoio.CAP_PROP_FPS);
+System.out.println( "fps: " + fps);*/
+
+
+// Set FPS
+/*	
+void setup() {
+  frameRate(4);
+}
+int pos = 0;
+void draw() {
+  background(204);
+  pos++;
+  line(pos, 20, pos, 80);
+  if (pos > width) {
+    pos = 0;
+  }
+} */
+
