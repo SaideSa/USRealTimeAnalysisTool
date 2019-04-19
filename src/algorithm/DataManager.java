@@ -54,3 +54,13 @@ void draw() {
   }
 } */
 
+/*public class BoxPlot {
+
+	private List<Double> errors = new ArrayList();
+	private double min;
+	private double max;
+	private double q1;
+	private double median;
+	private double q3;
+	*/
+
