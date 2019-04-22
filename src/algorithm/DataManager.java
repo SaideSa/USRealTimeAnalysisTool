@@ -3,7 +3,7 @@ package algorithm;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-
+//import javax.swing.ImageIcon; 
 import org.opencv.core.Mat;
 
 public class DataManager {
@@ -30,6 +30,21 @@ public static Image toBufferedImage(Mat m) {
 
     return image;
 }}
+
+
+
+
+//Aufnahme skallieren lassen
+/*
+ * public class Scale {  
+
+        ImageIcon ico = new ImageIcon("/home/webs/bild.jpg"); 
+        ico.setImage(ico.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT)); 
+    } 
+}
+
+ */
+
 
 
 // FPS anzeigen lassen:
