@@ -1,6 +1,6 @@
 package main;
 
-public class Main extends gui.FirstClass {
+public class Main extends gui.MainFrame {
 	
 	public static void main(String [] args) {
 		

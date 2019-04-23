@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class FirstClass extends Application {
+public class MainFrame extends Application {
 	   public void start(Stage s) throws Exception {
 	    	s.setTitle("USRealTimeAnalysisTool");		
 	    	Pane p = new Pane();					
