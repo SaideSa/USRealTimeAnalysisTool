@@ -71,4 +71,77 @@ public class TestMain  {
 //	               
 //	            }
 //	            }});
-//		 
+//		
+//	button2.addActionListener(new java.awt.event.ActionListener() {
+//        // Beim Drücken des Buttons wird actionPerformed aufgerufen
+//        public void actionPerformed(java.awt.event.ActionEvent e) {
+//        	
+//        	final JFileChooser fc = 
+//			          new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); // filechooser will open the explorer 
+//			      int returnVal = fc.showOpenDialog(fc);
+//			      String loadFile = null;
+//			      if (returnVal == JFileChooser.APPROVE_OPTION) {
+//			        loadFile = fc.getSelectedFile().getAbsolutePath();
+//			        vc.capture(loadFile);
+//			       
+//			        while (vc.open) {
+//						panel.setFace(vc.setBufImg());
+//						 try {
+//				              Thread.sleep(25);
+//				            } catch (InterruptedException es) {
+//				              // TODO Auto-generated catch block
+//				              es.printStackTrace();
+//				            }
+//					
+//						panel.repaint();
+//						
+//
+//					}
+//			
+//		}
+//          
+//           
+//        }
+//        });
+System.out.println("Bitte geben Sie '1' für Livestream oder '0' für Video/Bild  ein");
+int checkStart = scan.nextInt();
+
+//The datatransport starts after user interaction. Here a Scanner have replaced the subsequent Button;
+if (checkStart == 1) {
+	vc.capture();
+
+	// Loop for reading a BufferedImage and painting it on a panel;
+	while (vc.open) {
+		panel.setFace(vc.readBufImg());
+		panel.fps = vc.fps;
+		panel.repaint();
+
+	}
+}else if( checkStart == 0) {
+ 	final JFileChooser fc = 
+	          new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); // filechooser will open the explorer 
+	      int returnVal = fc.showOpenDialog(fc);
+	      String loadFile = null;
+	      if (returnVal == JFileChooser.APPROVE_OPTION) {
+	        loadFile = fc.getSelectedFile().getAbsolutePath();
+	        vc.capture(loadFile);
+	       
+	        while (vc.open) {
+				panel.setFace(vc.readBufImg());
+				 try {
+	              Thread.sleep(25);
+		            } catch (InterruptedException es) {
+		              // TODO Auto-generated catch block
+		              es.printStackTrace();
+		            }
+				 panel.fps = vc.fps;
+				 panel.repaint();
+				
+
+			}
+}
+}
+
+
+}
+}
