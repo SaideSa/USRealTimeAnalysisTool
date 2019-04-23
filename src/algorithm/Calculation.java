@@ -22,14 +22,14 @@ public class Calculation {
 		return entfernung;
 	}
 
-	// Berechnet die entfernunf 2er Punkte durch übergabe der Werte
+	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
 
 	public static int berechnen2(int x1, int y1, int x2, int y2) {
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
 
-	// Es können nur max 2 Punkte (Boen) mit linksclick gesetzt werden und mit
-	// rechtsclick entfernt werden
+	// Es können nur max 2 Punkte (Boxen) mit Linksklick gesetzt werden und mit
+	// Rechtsklick entfernt werden
 
 	public static void MouseListenerPressed(MouseEvent evt) {
 		int button = evt.getButton();
@@ -52,7 +52,7 @@ public class Calculation {
 
 	}
 
-	// Gibt die Entfernung der Pixeln der zwei Boxen aus sobald der zweite gesetzt
+	// Gibt die Entfernung der Pixel der zwei Boxen aus, sobald der zweite gesetzt
 	// wurde
 
 	public static void MouseListenerReleased(MouseEvent evt) {
