@@ -32,7 +32,9 @@ public static Image toBufferedImage(Mat m) {
 }}
 
 
-
+// BufferedImage skalieren
+/* BufferedImage ergebnis = new BufferedImage(skaliertebreite, skaliertehöhe, , BufferedImage.TYPE_INT_ARGB);
+ergebnis.getGraphics().drawImage(image, 0,0, skaliertebreite, skaliertehöhe, null); */
 
 //Aufnahme skallieren lassen
 /*
