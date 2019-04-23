@@ -6,7 +6,5 @@ public class Main extends gui.MainFrame {
 		
 		launch();
 		
-		
 	}
-
 }

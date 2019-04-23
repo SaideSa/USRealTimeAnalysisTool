@@ -1,10 +1,12 @@
 package gui;
 
 import javafx.application.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -12,9 +14,15 @@ public class MainFrame extends Application {
 	
 	   public void start(Stage s) throws Exception {
 		   
-		    // Hauptfenster (900x500) mit Titel wird erstellt, Panel drauf platziert
+		   //Methode in Testklasse liefert BufferedImage, das in JavaFX Image i konvertiert wird, ImageView erstellt
+		   Image i = SwingFXUtils.toFXImage(Test.us(), null);
+		   ImageView iv = new ImageView(i);
+		   
+		    // Hauptfenster (900x500) mit Titel wird erstellt, Panel erstellt, darauf ImageView mit X,Y-Koordinaten platziert
+		   	Pane hauptfenster = new Pane(iv);	
+		   	iv.setLayoutX(20);
+		   	iv.setLayoutY(50);
 	    	s.setTitle("USRealTimeAnalysisTool");		
-	    	Pane hauptfenster = new Pane();					
 	    	s.setScene(new Scene(hauptfenster, 900, 500));	
 	    	
 	    	// Berechnen-Button erstellt & auf Panel mit X,Y-Koordinaten platziert
