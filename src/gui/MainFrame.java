@@ -79,6 +79,65 @@ public class MainFrame extends Application {
            reset.setLayoutX(500);
            reset.setLayoutY(80);
           
+           // Punkt A - Label 
+           Label punktA = new Label ("Punkt A : ");
+           hauptfenster.getChildren().add(punktA);
+           punktA.setLayoutX(500);
+           punktA.setLayoutY(160);
+           
+           // X- Label 
+           Label x = new Label ("X:");
+           hauptfenster.getChildren().add(x);
+           x.setLayoutX(500);
+           x.setLayoutY(200);
+           
+           //X-Textfeld
+           TextField tfx = new TextField();
+           hauptfenster.getChildren().add(tfx);
+           tfx.setLayoutX(560);
+           tfx.setLayoutY(200);
+
+           // Y - Label 
+           Label y = new Label ("Y:");
+           hauptfenster.getChildren().add(y);
+           y.setLayoutX(500);
+           y.setLayoutY(240);
+           
+           //Y-Textfeld
+           TextField tfy = new TextField();
+           hauptfenster.getChildren().add(tfy);
+           tfy.setLayoutX(560);
+           tfy.setLayoutY(240);
+           
+           // Punkt B - Label 
+           Label punktB = new Label ("Punkt B : ");
+           hauptfenster.getChildren().add(punktB);
+           punktB.setLayoutX(500);
+           punktB.setLayoutY(300);
+           
+           // X- Label 
+           Label xb = new Label ("X:");
+           hauptfenster.getChildren().add(xb);
+           xb.setLayoutX(500);
+           xb.setLayoutY(380);
+           
+           //X-Textfeld
+           TextField tfxb = new TextField();
+           hauptfenster.getChildren().add(tfxb);
+           tfxb.setLayoutX(560);
+           tfxb.setLayoutY(380);
+
+           // Y - Label 
+           Label yb = new Label ("Y:");
+           hauptfenster.getChildren().add(yb);
+           yb.setLayoutX(500);
+           yb.setLayoutY(420);
+           
+           //Y-Textfeld
+           TextField tfyb = new TextField();
+           hauptfenster.getChildren().add(tfyb);
+           tfyb.setLayoutX(560);
+           tfyb.setLayoutY(420);
         
            
            // Hauptfenster (900x500) mit Titel wird dargestellt
