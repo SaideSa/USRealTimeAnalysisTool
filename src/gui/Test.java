@@ -8,7 +8,7 @@ public class Test {
 	
 	public static BufferedImage us() throws Exception {
 		
-		BufferedImage bi = ImageIO.read(new File("Z:\\users\\feike\\PROJ1\\us.png"));
+		BufferedImage bi = ImageIO.read(new File());
 		
 		return bi;
 			
