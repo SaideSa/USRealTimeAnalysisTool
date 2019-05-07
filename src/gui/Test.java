@@ -6,12 +6,12 @@ import javax.imageio.ImageIO;
 
 public class Test {
 	
-	public static BufferedImage us() throws Exception {
+	//public static BufferedImage us() throws Exception {
 		
-		BufferedImage bi = ImageIO.read(new File());
+		//BufferedImage bi = ImageIO.read(new File(""));
 		
-		return bi;
+		//return bi;
 			
-	}
+	//}
 
 }

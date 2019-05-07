@@ -20,8 +20,8 @@ public class MainFrame extends Application {
     public void start(Stage s) throws Exception {
         
            //Methode in Testklasse liefert BufferedImage, das in JavaFX Image i konvertiert wird, ImageView erstellt
-           Image i = SwingFXUtils.toFXImage(Test.us(), null);
-           ImageView iv = new ImageView(i);
+          // Image i = SwingFXUtils.toFXImage(Test.us(), null);
+           //ImageView iv = new ImageView(i);
            
            //Menubar mit Optionen wird erstellt
            MenuBar menuBar = new MenuBar();
@@ -42,9 +42,9 @@ public class MainFrame extends Application {
            menuBar.getMenus().addAll(options, help);
            
            // auf Panel wird UsBild gesetzt mit X,Y-Koordinaten, auf BorderPane wird menuBar & Panel gesetzt
-           Pane hauptfenster = new Pane(iv);
-           iv.setLayoutX(20);
-           iv.setLayoutY(50);
+           Pane hauptfenster = new Pane();
+           //iv.setLayoutX(20);
+           //iv.setLayoutY(50);
            BorderPane bp = new BorderPane();
            bp.setTop(menuBar);
            bp.setCenter(hauptfenster);
