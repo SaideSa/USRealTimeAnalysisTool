@@ -49,7 +49,7 @@ ergebnis.getGraphics().drawImage(image, 0,0, skaliertebreite, skaliertehöhe, nul
 
 
 
-// FPS anzeigen lassen:
+//FPS anzeigen lassen:
 /*VideoCapture videoCapture = new VideoCapture();
 videoCapture.open("c:/movies/mymovie.mp4");
 double fps = videoCapture.get(Videoio.CAP_PROP_FPS);
