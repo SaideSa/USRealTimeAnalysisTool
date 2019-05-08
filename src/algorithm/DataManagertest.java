@@ -1,4 +1,4 @@
-package algorithm;
+/*package algorithm;
 import java.awt.Image; 
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -58,5 +58,5 @@ private void runMainLoop(String[] args) {
 	}
 			  
 }
-
+*/
 	 

@@ -1,7 +1,7 @@
 package algorithm;
 
 import java.awt.Image;
-import InputOutput.VideoCapturing;
+import inputOutput.VideoCapturing;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 //import javax.swing.ImageIcon; 
