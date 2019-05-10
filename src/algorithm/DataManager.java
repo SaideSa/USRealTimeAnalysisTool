@@ -7,9 +7,16 @@ import java.awt.image.DataBufferByte;
 import javax.swing.ImageIcon; 
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
+import inputOutput.AbstractImageSource;
 
 public class DataManager {
 	// Klasse zur Formatierung von einer Matrix in ein Buffered Image
+
+/*	public Mat Name(){
+		while(openConnection()==true){
+		return getNextMat();
+		}
+	} */
 
 	public BufferedImage readBufImg() {
 		BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(readMatFrame());
