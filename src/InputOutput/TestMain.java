@@ -34,7 +34,7 @@ public class TestMain  {
     main.setLayout(new BorderLayout());
     //panel für tespanel
     TestPanel panel = new TestPanel();
-
+    //TestPanel enthält das image 
     //frame.getContentPane().add(panel, BorderLayout.CENTER);
     main.add(panel, BorderLayout.CENTER);
 

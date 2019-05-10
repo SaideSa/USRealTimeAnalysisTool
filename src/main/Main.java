@@ -1,5 +1,10 @@
 package main;
 
-public class Main {
-
+public class Main extends gui.MainFrame {
+	
+	public static void main(String [] args) {
+		
+		launch();
+		
+	}
 }
