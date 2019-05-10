@@ -10,8 +10,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv3.4.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv"/>
 	<classpathentry kind="lib" path="lib/opencv-346.jar"/>
-	<classpathentry kind="lib" path="C:/prg/source-archive/igtlink4j/lib/OpenIGTLink/lib/Jama-1.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/prg/source-archive/igtlink4j/lib/OpenIGTLink/lib/nrsdk-3.8.8-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="C:/prg/source-archive/igtlink4j/lib/OpenIGTLink/lib/nrsdk-3.9.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/Jama-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/nrsdk-3.8.8-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/nrsdk-3.9.1-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
