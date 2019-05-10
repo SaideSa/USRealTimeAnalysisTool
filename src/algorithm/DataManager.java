@@ -8,6 +8,7 @@ import java.awt.image.DataBufferByte;
 import org.opencv.core.Mat;
 
 public class DataManager {
+	// Klasse zur Formatierung von einer Matrix in ein Buffered Image
 
 	public static Image toBufferedImage(Mat frameMatrix) {
 	    int type = BufferedImage.TYPE_BYTE_GRAY;
