@@ -55,11 +55,11 @@ public class OpenIGTImageSource extends AbstractImageSource {
 
 	}
 
-	// public Mat getNextMat() {
+	public void getNextMat() {
 
-		//Umwandlung von Byte in Mat nötig;
+		//Umwandlung von Byte in Mat nötig später Mat als Rückgabewert;
 	
-	// }
+	}
 
 	public boolean checkConnection() {
 		isConnected = igtConnection.isConnected();
