@@ -12,12 +12,12 @@ import org.opencv.videoio.Videoio;
 
 public class FilestreamSource extends AbstractImageSource{
 
-	private VideoCapture vc;
-	public BufferedImage bufImg = null;
-	public int fps;
-	private String path;
-	
-	public FilestreamSource(String path) {
+  private VideoCapture vc;
+  public BufferedImage bufImg = null;
+  public int fps;
+  private String path;
+
+  public FilestreamSource(String path) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		frameMatrix = new Mat();
 		this.path = path;
@@ -38,8 +38,7 @@ public class FilestreamSource extends AbstractImageSource{
 		return isConnected;
 	}
 	
-	public Mat getNextMat() { // könnte auch getNextFrame heißen;
-		// System.out.println("Hello");
+	public Mat getNextMat() { 
 		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
@@ -54,7 +53,7 @@ public class FilestreamSource extends AbstractImageSource{
 
 	
 	public BufferedImage readBufImg() {
-		// System.out.println("Hello2");
+	
 		bufImg = (BufferedImage) HighGui.toBufferedImage(getNextMat());
 		return bufImg;
 
