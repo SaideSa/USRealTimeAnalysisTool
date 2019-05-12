@@ -28,7 +28,7 @@ public class TestDataManagerThread extends Thread {
 		BufferedImage img;
 		
 		 do {
-			 img=this.datamanager.refreshImage();
+			 img=this.datamanager.getNextImage();
 			
 			panel.setFace(img);
 
