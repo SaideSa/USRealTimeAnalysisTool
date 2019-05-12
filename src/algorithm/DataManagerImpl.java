@@ -14,7 +14,7 @@ public class DataManagerImpl implements DataManager {
 	
 	private AbstractImageSource src;
 
-
+	
 	@Override
 	public void start(String filesrc) { 
 		if (filesrc == null) {
@@ -29,7 +29,8 @@ public class DataManagerImpl implements DataManager {
 	}
 	
 	@Override
-	public BufferedImage refreshImage() {
+	
+	public BufferedImage getNextImage() {
 		if (this.src.isConnected) {
 		return (BufferedImage) HighGui.toBufferedImage(this.src.getNextMat());
 		}
@@ -61,8 +62,6 @@ public class DataManagerImpl implements DataManager {
 		return bufImg;
 	
 	}
-
-
 
 
 }

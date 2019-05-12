@@ -6,7 +6,7 @@ public interface DataManager {
 	
 	// src=null für live
 	void start(String src); 
-	BufferedImage refreshImage();
+	BufferedImage getNextImage();
 	
 	int berechnen(Box a, Box b);
 	int berechnen();
