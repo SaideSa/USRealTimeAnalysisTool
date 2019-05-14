@@ -39,7 +39,7 @@ public class TestDataManagerThread extends Thread {
 		
 	}
 	public DataManager getDataManager() {
-		
+		System.out.println("getDataManager");
 		return this.datamanager;
 	}
 }

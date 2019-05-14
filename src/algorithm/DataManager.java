@@ -1,5 +1,8 @@
 package algorithm;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import org.opencv.core.Point;
 
 public interface DataManager {
 	void stop();
@@ -8,6 +11,10 @@ public interface DataManager {
 	void start(String src); 
 	BufferedImage getNextImage();
 	
-	int berechnen(Box a, Box b);
-	int berechnen();
+	int getDistanceBox();
+	int getDistanceXY(int x1, int y1, int x2, int y2);
+	int getDistancePoint(Point a, Point b);
+	
+	void MouseListenerPressed(MouseEvent evt);
+	void MouseListenerReleased(MouseEvent evt);
 }
