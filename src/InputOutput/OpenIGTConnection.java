@@ -47,7 +47,7 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 
 	public boolean stop() {
 		client.stopClient();
-		return client.isConnected();
+		return client.isInterrupted();
 	}
 	
 	public boolean isConnected() {

@@ -31,6 +31,7 @@ public class LivestreamSource extends AbstractImageSource{
 			isConnected = true;
 		}else {
 			System.out.println("!!! Did not connect to camera !!!");
+			isConnected = false;
 		}
 		
 		

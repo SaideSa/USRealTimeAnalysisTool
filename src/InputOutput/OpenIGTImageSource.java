@@ -9,7 +9,6 @@ public class OpenIGTImageSource extends AbstractImageSource {
 	private int port;
 	private OpenIGTConnection igtConnection;
 	private ImageMessage imgMsg;
-	private boolean isConnected;
 
 	public OpenIGTImageSource(String ipAddress, int port) {
 		ip = ipAddress;
