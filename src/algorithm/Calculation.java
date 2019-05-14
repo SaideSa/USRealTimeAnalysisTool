@@ -24,6 +24,8 @@ public class Calculation {
 		int ankathete1 = tempbox3.y - tempbox1.y;
 		int ankathete2 = tempbox3.x - tempbox2.x;
 		int entfernung = (int) Math.hypot(ankathete1, ankathete2);
+		
+		System.out.println(entfernung);
 		return entfernung;
 	}
 
