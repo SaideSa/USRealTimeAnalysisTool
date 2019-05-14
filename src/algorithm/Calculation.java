@@ -3,6 +3,9 @@ package algorithm;
 import java.awt.event.*;
 import java.util.*;
 
+import org.opencv.core.Point;
+
+
 public class Calculation {
 
 	// Erstellt einen Vector, indem die Boxen gespeichert werden
@@ -12,7 +15,7 @@ public class Calculation {
 	// Berechnet anhand der Boxen des Vectors die Entfernung der zwei gesetzten
 	// Boxen
 
-	public static int berechnen() {
+	public static int getDistanceBox() {
 		Box tempbox1 = (Box) dinge.firstElement();
 		Box tempbox2 = (Box) dinge.lastElement();
 		Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
@@ -24,9 +27,29 @@ public class Calculation {
 
 	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
 
-	public static int berechnen2(int x1, int y1, int x2, int y2) {
+	public static int getDistanceXY(int x1, int y1, int x2, int y2) {
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
+	
+	
+	//Berechnet die Entfernung anhand zweier Points
+	
+	public static double getDistancePoint(Point a, Point b){
+	    double distance = 0.0;
+	    try{
+	        if(a != null && b != null){
+	            double xDiff = a.x - b.x;
+	            double yDiff = a.y - b.y;
+	            distance = Math.sqrt(Math.pow(xDiff,2) + Math.pow(yDiff, 2));
+	        }
+	    }catch(Exception e){
+	        
+	    }
+	    return distance;
+	}
+	
+	
+	
 
 	// Es können nur max 2 Punkte (Boxen) mit Linksklick gesetzt werden und mit
 	// Rechtsklick entfernt werden
