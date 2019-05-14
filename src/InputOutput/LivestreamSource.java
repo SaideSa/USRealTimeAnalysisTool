@@ -24,13 +24,14 @@ public class LivestreamSource extends AbstractImageSource{
 	public boolean openConnection() {
 		
 		System.out.println("capDev");
-		vc = new VideoCapture(0);
+		vc = new VideoCapture(deviceID);
 		
 		if(vc.isOpened()) {
 			System.out.println("found VideoSource " + vc.toString());
 			isConnected = true;
 		}else {
 			System.out.println("!!! Did not connect to camera !!!");
+			isConnected = false;
 		}
 		
 		
