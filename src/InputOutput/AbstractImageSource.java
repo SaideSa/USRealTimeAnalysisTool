@@ -4,8 +4,8 @@ import org.opencv.core.Mat;
 
 public abstract class AbstractImageSource {
 	
-	public static boolean isConnected = false;
-	public static Mat frameMatrix;
+	public  boolean isConnected = false;
+	public  Mat frameMatrix;
 	
 	public abstract Mat getNextMat();
 	
