@@ -60,6 +60,34 @@ public class MainFrame extends Application {
                    
                }
            });
+           Button b1 = new Button("Freeze");
+       	hauptfenster.getChildren().add(b1);
+       	b1.setText("Freeze");
+       	String so= b1.getText();
+       	b1.setLayoutX(600);
+       	b1.setLayoutY(600);
+       	b1.setOnAction(new EventHandler<ActionEvent>() {
+             	 
+       	     
+               public void handle(ActionEvent event) {
+               	
+
+              	 
+                   StackPane secondaryLayout = new StackPane();
+
+    
+                   Scene secondScene = new Scene(secondaryLayout, 500, 300);
+    
+                   // New window (Stage)
+                   Stage newWindow = new Stage();
+                   newWindow.setTitle("Freeze");
+                   newWindow.setScene(secondScene);
+    
+    
+                   newWindow.show();
+               }
+           });
+           
            
            // Ergebnis-Label erstellt & auf Panel mit X,Y-Koordinaten platziert
            Label ergebnis = new Label("Ergebnis:");
