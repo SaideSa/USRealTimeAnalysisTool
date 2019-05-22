@@ -16,7 +16,10 @@ import javafx.stage.Stage;
 
 public class MainFrame extends Application {
        
-    
+    public static void main(String[]args) {
+    	
+    }
+
     public void start(Stage s) throws Exception {
         
            //Methode in Testklasse liefert BufferedImage, das in JavaFX Image i konvertiert wird, ImageView erstellt
@@ -35,12 +38,13 @@ public class MainFrame extends Application {
            MenuItem file = new MenuItem("Speicherort festlegen");
            MenuItem manual = new MenuItem("Bedienungshilfe");
            manual.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
-         
+           
+           
            
            options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), file);
            help.getItems().add(manual);
            menuBar.getMenus().addAll(options, help);
-           
+          
            // auf Panel wird UsBild gesetzt mit X,Y-Koordinaten, auf BorderPane wird menuBar & Panel gesetzt
            Pane hauptfenster = new Pane();
            //iv.setLayoutX(20);
@@ -60,12 +64,13 @@ public class MainFrame extends Application {
                    
                }
            });
-           Button b1 = new Button("Freeze");
+        //Freeze Fenster erstellt, welches ein Neues Fenster öffnet
+        Button b1 = new Button("Freeze");
        	hauptfenster.getChildren().add(b1);
        	b1.setText("Freeze");
        	String so= b1.getText();
        	b1.setLayoutX(600);
-       	b1.setLayoutY(600);
+       	b1.setLayoutY(500);
        	b1.setOnAction(new EventHandler<ActionEvent>() {
              	 
        	     
@@ -169,8 +174,9 @@ public class MainFrame extends Application {
         
            
            // Hauptfenster (900x500) mit Titel wird dargestellt
+           s.setResizable(false);
            s.setTitle("USRealTimeAnalysisTool");        
-           s.setScene(new Scene(bp, 1200, 800));    
+           s.setScene(new Scene(bp, 1000, 600));    
            s.show();
            
     }
