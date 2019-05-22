@@ -39,7 +39,7 @@ public class LivestreamSource extends AbstractImageSource{
 	}
 	
 	public Mat getNextMat() { 
-		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
+		//System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
 		

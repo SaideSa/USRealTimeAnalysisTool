@@ -34,7 +34,7 @@ public class TestPanel extends JPanel {
 		g.setFont(new Font("arial", 2, 20));
 		g.setColor(Color.WHITE);
 		g.drawString("Frame per second: " + (int) fps, 150, 50);
-		System.out.print("TEstPANEL");
+		//System.out.print("TEstPANEL");
 	}
 
 }
