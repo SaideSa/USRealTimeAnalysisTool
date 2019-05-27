@@ -9,13 +9,8 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
 /**
-<<<<<<< HEAD
  * provides the livestream footage from a webcam, ultrasound device or any other
  * suitable devices.
-=======
- * provides the livestream footage from a webcam, ultrasound device or
- * any other suitable devices.
->>>>>>> Team3
  * 
  * @author Team 3
  *
@@ -28,12 +23,7 @@ public class LivestreamSource extends AbstractImageSource {
 	private int deviceID = 0;
 
 	/**
-<<<<<<< HEAD
-	 * constructs a new LivestreamSource object with the transmitted
-	 * <code>id</code>.
-=======
 	 * constructs a new LivestreamSource object with the transmitted <code>id</code>.
->>>>>>> Team3
 	 * 
 	 * @param id describes which device is used
 	 */
@@ -44,13 +34,8 @@ public class LivestreamSource extends AbstractImageSource {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * initializes a new VideoCapture object using the <code>deviceID</code>. The
-	 * webcam (or other video devices) is opened.
-=======
 	 * initializes a new VideoCapture object using the <code>deviceID</code>. 
 	 * The webcam (or other video devices) is opened.
->>>>>>> Team3
 	 * 
 	 * @return whether the connection was successful or not
 	 */
