@@ -8,9 +8,16 @@ import InputOutput.FilestreamSource;
 import InputOutput.LivestreamSource;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
+import org.opencv.videoio.VideoCapture;
 
 public class DataManagerImpl implements DataManager {
 	
@@ -83,8 +90,69 @@ public class DataManagerImpl implements DataManager {
 		
 	}
 
-	
+	public LatencyTest() {
+	    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	}
 
+	    VideoCapture cap = new VideoCapture(0);
+	    Mat camImage = new Mat();
+	    JFrame frame = new JFrame();
+	    JLabel label = new JLabel();
+	    frame.add(label);
+	    frame.setVisible(true);
+	    frame.pack();
+	    int frameWidth = 320;
+	    int frameHeight = 240;
+	    frame.setSize(frameWidth, frameHeight);
+	    cap.set(Videoio.CAP_PROP_FRAME_WIDTH,frameWidth);
+	    cap.set(Videoio.CAP_PROP_FRAME_HEIGHT,frameHeight);
+	/**
+	* initialization of a new Videocapture object
+	* 
+	*  @returns the defined dimension of the new object
+	* 
+	*/
+	    if (cap.isOpened()) {
+	        while (true) {
+	            cap.read(camImage);
+	            if (!camImage.empty()) {
+	                label.setIcon(new ImageIcon(convertMatToBufferedImage(camImage)));
+	            } else {
+	                System.out.println("-- Frame not captured --");
+	                break;
+	            }
+	        }
+	    } else {
+	        System.out.println("Couldn't open capture.");
+	    }
+	}          /** the connection was successful or not */
 
+	public  BufferedImage convertMatToBufferedImage(Mat in) {
+	    int width = in.width();
+	    int height = in.height();
+	    BufferedImage out;
+	    byte[] data = new byte[width * height * (int) in.elemSize()];
+	    int type;
+	    in.get(0, 0, data);
+	    
+	    
+	    if (in.channels() == 1) {
+	        type = BufferedImage.TYPE_BYTE_GRAY;
+	    } else {
+	        type = BufferedImage.TYPE_3BYTE_BGR;
+	    }
+
+	    out = new BufferedImage(width, height, type);
+	    out.getRaster().setDataElements(0, 0, width, height, data);
+	/**
+	* the latency is generating by out.getRaster
+	*
+	*@returns the connection was successful and is generating
+	*
+	*/
+	    return out;
+		}
+	}
+	 	
 }
 
