@@ -9,6 +9,10 @@ public interface DataManager {
 	
 	// src=null für live
 	void start(String src); 
+	/**
+	 * start live stream
+	 * @return
+	 */
 	BufferedImage getNextImage();
 	
 	int getDistanceBox();
