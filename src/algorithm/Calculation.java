@@ -2,13 +2,14 @@ package algorithm;
 
 
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 import org.opencv.core.Point;
 
 
 
-public class Calculation {
+public class Calculation extends DataManager{
 
 	// Erstellt einen Vector, indem die Boxen gespeichert werden
 
@@ -17,7 +18,7 @@ public class Calculation {
 	// Berechnet anhand der Boxen des Vectors die Entfernung der zwei gesetzten
 	// Boxen
 
-	public static int getDistanceBox() {
+	public    int getDistanceBox() {
 		Box tempbox1 = (Box) dinge.firstElement();
 		Box tempbox2 = (Box) dinge.lastElement();
 		Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
@@ -31,14 +32,14 @@ public class Calculation {
 
 	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
 
-	public static int getDistanceXY(int x1, int y1, int x2, int y2) {
+	public  int getDistanceXY(int x1, int y1, int x2, int y2) {
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
 	
 	
 	//Berechnet die Entfernung anhand zweier Points
 	
-	public static int getDistancePoint(Point a, Point b){
+	public getDistancePoint(Point a, Point b){
 	    int distance = 0;
 	    try{
 	        if(a != null && b != null){
@@ -84,7 +85,7 @@ public class Calculation {
 	// Gibt die Entfernung der Pixel der zwei Boxen aus, sobald der zweite gesetzt
 	// wurde
 
-	public static void MouseListenerReleased(MouseEvent evt) {
+	public  void MouseListenerReleased(MouseEvent evt) {
 
 		if (evt.getButton() == 1 && dinge.size() == 2) {
 			if (dinge.size() == 2) {
@@ -92,6 +93,42 @@ public class Calculation {
 				System.out.println("Die Entfernung beträgt " + ergebnis);
 			}
 		}
+	}
+
+	@Override
+	void stop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void start(String src) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	BufferedImage getNextImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	int getDistancePoint(Point a, Point b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	void MouseListenerPressed(MouseEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	void MouseListenerReleased(MouseEvent evt) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

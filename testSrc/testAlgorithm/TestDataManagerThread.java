@@ -8,10 +8,10 @@ import org.opencv.highgui.HighGui;
 import InputOutput.AbstractImageSource;
 import algorithm.DataManagerImpl;
 import testIO.TestPanel;
-import algorithm.DataManager;
+import algorithm.DataManagerI;
 
 public class TestDataManagerThread extends Thread {
-	private DataManager datamanager;
+	private DataManagerI datamanager;
 	private TestPanel panel;
 	
 	public TestDataManagerThread(TestPanel tp) {
@@ -38,7 +38,7 @@ public class TestDataManagerThread extends Thread {
 		} while (img != null) ;
 		
 	}
-	public DataManager getDataManager() {
+	public DataManagerI getDataManager() {
 		System.out.println("getDataManager");
 		return this.datamanager;
 	}

@@ -1,8 +1,8 @@
 package algorithm;
 
-public class DataManager {
+public class DataProcessor {
 
-	public DataManager() {
+	public DataProcessor() {
 		// TODO Auto-generated constructor stub
 	}
 
