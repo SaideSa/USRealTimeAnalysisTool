@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 
 import InputOutput.AbstractImageSource;
 import InputOutput.FilestreamSource;
@@ -8,6 +9,7 @@ import InputOutput.LivestreamSource;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
 
 public class DataManagerImpl implements DataManager {
@@ -47,13 +49,13 @@ public class DataManagerImpl implements DataManager {
 
 	
 	@Override
-	public int berechnen(Box a, Box b) {
-		return Calculation.berechnen2(a.x, a.y, b.x, b.y);
+	public int getDistanceBox() {
+		return Calculation.getDistanceBox();
 	}
 	
 	@Override
-	public int berechnen() {
-		return Calculation.berechnen();
+	public int getDistanceXY(int x1, int y1, int x2, int y2) {
+		return Calculation.getDistanceXY(x1, y1, x2, y2);
 	}
 	
 	
@@ -62,6 +64,26 @@ public class DataManagerImpl implements DataManager {
 		return bufImg;
 	
 	}
+
+	@Override
+	public int getDistancePoint(Point a, Point b) {
+		return Calculation.getDistancePoint(a, b);
+	}
+
+	@Override
+	public void MouseListenerPressed(MouseEvent evt) {
+		System.out.println("DataManagerImpl.MousePressed");
+		Calculation.MouseListenerPressed(evt);
+		
+	}
+
+	@Override
+	public void MouseListenerReleased(MouseEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 
 }

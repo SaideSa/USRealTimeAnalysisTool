@@ -10,8 +10,8 @@ import org.opencv.videoio.Videoio;
 
 
 /**
- * provides the livestream footage from a webcam, ultrasound device or
- * any other suitable devices.
+ * provides the livestream footage from a webcam, ultrasound device or any other
+ * suitable devices.
  * 
  * @author Team 3
  *
@@ -62,6 +62,7 @@ public class LivestreamSource extends AbstractImageSource {
 	 * @return <code>frameMatrix</code>
 	 */
 	public Mat getNextMat() {
+		// System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
