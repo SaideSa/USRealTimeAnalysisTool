@@ -42,7 +42,7 @@ public class LivestreamSource extends AbstractImageSource {
 	public boolean openConnection() {
 
 		System.out.println("capDev");
-		vc = new VideoCapture(deviceID, (int) Videoio.CAP_DSHOW);
+		vc = new VideoCapture(deviceID);
 		
 		
 		if (vc.isOpened()) {
@@ -62,8 +62,6 @@ public class LivestreamSource extends AbstractImageSource {
 	 * @return <code>frameMatrix</code>
 	 */
 	public Mat getNextMat() {
-		// System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
-		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
 

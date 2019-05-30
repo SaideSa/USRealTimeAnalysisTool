@@ -41,7 +41,7 @@ public class FilestreamSource extends AbstractImageSource{
 	 * @return whether the connection was successful or not
 	 */
 	public boolean openConnection() {
-		vc = new VideoCapture(path, (int) Videoio.CAP_DSHOW);
+		vc = new VideoCapture(path);
 		
 		if (vc.isOpened()) {
 			System.out.println("found VideoSource " + vc.toString());
