@@ -8,11 +8,10 @@ import org.opencv.highgui.HighGui;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
-public class LivestreamSource extends AbstractImageSource{
+public class LivestreamSource extends AbstractImageSource {
 	
 	private VideoCapture vc;
 	public BufferedImage bufImg = null;
-	public int fps;
 	private int deviceID = 0;
 	
 	public LivestreamSource(int id) {
@@ -24,7 +23,8 @@ public class LivestreamSource extends AbstractImageSource{
 	public boolean openConnection() {
 		
 		System.out.println("capDev");
-		vc = new VideoCapture(deviceID);
+		vc = new VideoCapture(deviceID, (int) Videoio.CAP_DSHOW);
+		
 		
 		if(vc.isOpened()) {
 			System.out.println("found VideoSource " + vc.toString());
@@ -59,9 +59,17 @@ public class LivestreamSource extends AbstractImageSource{
 	}
 
 	public boolean closeConnection() {
-		vc.release();
-		isConnected = false;
-		return isConnected;
+		
+		try {
+			vc.release();
+			HighGui.destroyAllWindows();
+			exit = true;
+			isConnected = false;
+		}catch(Exception ex) {
+			exit = false;
+		}
+		
+		return exit;
 	}
 
 }

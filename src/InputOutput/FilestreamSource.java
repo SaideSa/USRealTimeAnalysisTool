@@ -14,8 +14,8 @@ public class FilestreamSource extends AbstractImageSource{
 
   private VideoCapture vc;
   public BufferedImage bufImg = null;
-  public int fps;
   private String path;
+  private int frameTotalNumber;
 
   public FilestreamSource(String path) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -25,15 +25,17 @@ public class FilestreamSource extends AbstractImageSource{
 
 	public boolean openConnection() {
 		System.out.println("capFile");
-		vc = new VideoCapture(path);
+		vc = new VideoCapture(path, (int) Videoio.CAP_DSHOW);
 		if (vc.isOpened()) {
 
 			System.out.println("found VideoSource " + vc.toString());
 			isConnected = true;
+			frameTotalNumber = (int) vc.get(Videoio.CAP_PROP_FRAME_COUNT);
 
 		} else {
 			System.out.println("!!! Did not connect to camera !!!");
 		}
+			
 		
 		return isConnected;
 	}
@@ -60,8 +62,20 @@ public class FilestreamSource extends AbstractImageSource{
 	}
 	
 	public boolean closeConnection() {
-		isConnected=false;
-		return isConnected;
+		try {
+			vc.release();
+			HighGui.destroyAllWindows();
+			exit = true;
+			isConnected = false;
+		}catch(Exception ex) {
+			exit = false;
+		}
+		
+		return exit;
+	}
+	
+	public int getFrameNumber() {
+		return frameTotalNumber;
 	}
 }
 

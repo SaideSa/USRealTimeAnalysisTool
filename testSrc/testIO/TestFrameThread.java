@@ -12,7 +12,7 @@ public class TestFrameThread extends Thread {
 	Mat mat;
 	AbstractImageSource imgSrc;
 	BufferedImage bufImg;
-	TestPanel panel = new TestPanel();
+	TestPanel panel;
 	
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
@@ -25,6 +25,7 @@ public class TestFrameThread extends Thread {
 				mat = imgSrc.getNextMat();
 				bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
 				panel.setFace(bufImg);
+				panel.fps = imgSrc.fps;
 
 				try {
 					Thread.sleep(25);
