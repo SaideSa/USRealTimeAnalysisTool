@@ -24,10 +24,9 @@ public class FilestreamSource extends AbstractImageSource{
 	}
 
 	public boolean openConnection() {
-		System.out.println("capFile");
 		vc = new VideoCapture(path, (int) Videoio.CAP_DSHOW);
+		
 		if (vc.isOpened()) {
-
 			System.out.println("found VideoSource " + vc.toString());
 			isConnected = true;
 			frameTotalNumber = (int) vc.get(Videoio.CAP_PROP_FRAME_COUNT);
@@ -41,7 +40,6 @@ public class FilestreamSource extends AbstractImageSource{
 	}
 	
 	public Mat getNextMat() { 
-		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
 		
