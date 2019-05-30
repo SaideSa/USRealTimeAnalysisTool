@@ -55,12 +55,12 @@ public class FilestreamSource extends AbstractImageSource{
 	}
 	
 	/**
-	 * Transmits the matrix of the picture
-	 * 
-	 * @return <code>frameMatrix</code>
-	 */	
+	   * Transmits the matrix of the picture
+	   * 
+	   * @return <code>frameMatrix</code>
+	   */	
 	public Mat getNextMat() { 
-		System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
+		//System.out.println((int) vc.get(Videoio.CAP_PROP_FPS));
 		fps = (int) vc.get(Videoio.CAP_PROP_FPS);
 		vc.read(frameMatrix);
 		
@@ -81,10 +81,10 @@ public class FilestreamSource extends AbstractImageSource{
 //	}
 	
 	/**
-	 *sets <code>isConnected = false</code>
-	 * 
-	 * @return <code>isConnected = false</code>
-	 */
+	   *sets <code>isConnected = false</code>
+	   * 
+	   * @return <code>isConnected = false</code>
+	   */
 	public boolean closeConnection() {
 		isConnected=false;
 		return isConnected;
