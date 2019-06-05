@@ -20,6 +20,7 @@ public class TestFrameThread extends Thread {
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
 		panel = tp;
+		save = new SaveImageSource();
 		start();
 	}
 	public void run() {
@@ -31,7 +32,7 @@ public class TestFrameThread extends Thread {
 				panel.fps = imgSrc.fps;
 				
 				if(saveVideoOn == true) {
-					save.saveVideo(mat);
+					save.writeMat(mat);
 				}
 
 
@@ -42,7 +43,7 @@ public class TestFrameThread extends Thread {
 	}
 	
 	public void saveVideoStart(String path) {
-		save = new SaveImageSource(path, imgSrc.fps, mat.width(), mat.height());
+		save.saveVideo(path, imgSrc.fps, mat.width(), mat.height());
 		saveVideoOn = true;
 		
 	}

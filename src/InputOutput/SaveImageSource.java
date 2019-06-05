@@ -25,8 +25,9 @@ public class SaveImageSource {
 	 * @param width
 	 * @param height
 	 */
-	public SaveImageSource(String path, int fps, int width, int height) {
-	
+		
+	public void saveVideo(String path, int fps, int width, int height) {
+		
 		this.path = path;
 		this.fps = fps;
 		size = new Size(width, height); 
@@ -34,16 +35,16 @@ public class SaveImageSource {
 		writer = new VideoWriter(path + "avi", fourcc, 30, size);
 		
 	}
-
+	
 	/**
 	 * This method is for storing each Mat object received passed as paramter
 	 * @param frameMatrix
 	 */
-	public void saveVideo(Mat frameMatrix) {
+	public void writeMat(Mat frameMatrix) {
 		writer.write(frameMatrix);
 
-		
 	}
+
 	
 
 }
