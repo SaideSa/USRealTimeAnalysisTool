@@ -4,11 +4,11 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class FirstClass extends JFrame implements MouseListener{
+public class FirstClassOLD extends JFrame implements MouseListener{
 	
 	
 	
-	public FirstClass() {
+	public FirstClassOLD() {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);

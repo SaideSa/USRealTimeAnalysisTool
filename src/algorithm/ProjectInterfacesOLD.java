@@ -1,8 +1,8 @@
 package algorithm;
 
-public class ProjectInterfaces {
+public class ProjectInterfacesOLD {
 
-	public ProjectInterfaces() {
+	public ProjectInterfacesOLD() {
 		// TODO Auto-generated constructor stub
 	}
 

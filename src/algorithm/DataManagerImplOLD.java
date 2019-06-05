@@ -12,7 +12,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
 
-public class DataManagerImpl implements DataManager {
+public class DataManagerImplOLD implements DataManager {
 	
 	private AbstractImageSource src;
 
