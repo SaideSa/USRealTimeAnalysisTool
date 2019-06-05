@@ -42,8 +42,13 @@ public class TestFrameThread extends Thread {
 	}
 	
 	public void saveVideoStart(String path) {
-		save = new SaveImageSource(path + ".avi", imgSrc.fps, mat.width(), mat.height());
+		save = new SaveImageSource(path, imgSrc.fps, mat.width(), mat.height());
 		saveVideoOn = true;
+		
+	}
+	
+	public void stopSave() {
+		saveVideoOn = false;
 		
 	}
 

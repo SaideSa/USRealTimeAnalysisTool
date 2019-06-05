@@ -32,7 +32,9 @@ public class TestFrame extends JFrame implements ActionListener {
 	JButton startFile = new JButton("Load File");
 	JButton stop = new JButton("Stop");
 	JButton saveVideo = new JButton("Save Video");
+	JButton stopSaveVideo = new JButton("Stop Saving Video");
 
+	
 	TestPanel videoPanel = new TestPanel();
 	AbstractImageSource imgSrc;
 	Mat mat;
@@ -63,15 +65,17 @@ public class TestFrame extends JFrame implements ActionListener {
 		buttonPanel.add(startFile);
 		buttonPanel.add(stop);
 		buttonPanel.add(saveVideo);
+		buttonPanel.add(stopSaveVideo);
 		startLive.addActionListener(this);
 		startFile.addActionListener(this);
 		stop.addActionListener(this);
 		saveVideo.addActionListener(this);
+		stopSaveVideo.addActionListener(this);
 
 		main.add(buttonPanel, BorderLayout.PAGE_END);
 
 		this.setContentPane(main);
-		;
+
 
 	}
 
@@ -100,6 +104,7 @@ public class TestFrame extends JFrame implements ActionListener {
 
 			}
 		}
+		
 		if (src == stop) {
 			if (imgSrc.closeConnection()) {
 				System.out.println("Connection stopped!");
@@ -117,6 +122,13 @@ public class TestFrame extends JFrame implements ActionListener {
 					thread.saveVideoStart(fileForSaving);
 
 				}
+			}
+
+		}
+		
+		if (src == stopSaveVideo) {
+			if (thread.saveVideoOn) {
+				thread.stopSave();
 			}
 
 		}
