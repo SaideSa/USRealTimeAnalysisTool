@@ -23,27 +23,28 @@ import InputOutput.*;
 
 /*This class needs TestPanel and TestFrameThread to work properly*/
 public class TestFrame extends JFrame implements ActionListener {
-	
-	JPanel main = new JPanel(); //this panel will contain a panel for buttons and another panel for painting the frames
-	
+
+	JPanel main = new JPanel(); // this panel will contain a panel for buttons and another panel for painting
+								// the frames
+
 	JPanel buttonPanel = new JPanel();
 	JButton startLive = new JButton("Start LiveStram");
 	JButton startFile = new JButton("Load File");
 	JButton stop = new JButton("Stop");
-	
+	JButton saveVideo = new JButton("Save Video");
+
 	TestPanel videoPanel = new TestPanel();
 	AbstractImageSource imgSrc;
 	Mat mat;
 	BufferedImage bufImg;
 	TestFrameThread thread;
 
-
 	public TestFrame() {
-	
+
 		init();
-	
+
 	}
-	
+
 	public void init() {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,23 +52,26 @@ public class TestFrame extends JFrame implements ActionListener {
 
 		main.setLayout(new BorderLayout());
 		main.add(videoPanel, BorderLayout.CENTER);
-	
-		/*Panel with three Buttons: startLive, startFile, stop*/
+
+		/* Panel with three Buttons: startLive, startFile, stop */
 		buttonPanel.setLayout(new FlowLayout());
 		startLive.setSize(100, 20);
 		startFile.setSize(100, 20);
 		stop.setSize(100, 20);
+		saveVideo.setSize(100, 20);
 		buttonPanel.add(startLive);
 		buttonPanel.add(startFile);
 		buttonPanel.add(stop);
+		buttonPanel.add(saveVideo);
 		startLive.addActionListener(this);
 		startFile.addActionListener(this);
 		stop.addActionListener(this);
+		saveVideo.addActionListener(this);
 
 		main.add(buttonPanel, BorderLayout.PAGE_END);
-		
-		this.setContentPane(main);;
-		
+
+		this.setContentPane(main);
+		;
 
 	}
 
@@ -80,12 +84,13 @@ public class TestFrame extends JFrame implements ActionListener {
 			thread = new TestFrameThread(videoPanel, imgSrc);
 
 		}
+
 		if (src == startFile) {
 			// filechooser will open the explorer;
 			final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			int returnVal = fc.showOpenDialog(fc);
 			String loadFile = null;
-			
+
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				loadFile = fc.getSelectedFile().getAbsolutePath();
 
@@ -95,21 +100,34 @@ public class TestFrame extends JFrame implements ActionListener {
 
 			}
 		}
-		if(src == stop) {
-			if(imgSrc.closeConnection()) {
+		if (src == stop) {
+			if (imgSrc.closeConnection()) {
 				System.out.println("Connection stopped!");
 			}
 		}
 
+		if (src == saveVideo) {
+			if (!thread.saveVideoOn) {
+				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				int returnVal = fc.showOpenDialog(fc);
+				String fileForSaving = null;
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					fileForSaving = fc.getSelectedFile().getAbsolutePath();
+					thread.saveVideoStart(fileForSaving);
+
+				}
+			}
+
+		}
+
 	}
 
-	
 	public static void startTestMainCV() {
 		TestFrame frame = new TestFrame();
 		frame.validate();
 		frame.setVisible(true);
-		
-	}
 
+	}
 
 }

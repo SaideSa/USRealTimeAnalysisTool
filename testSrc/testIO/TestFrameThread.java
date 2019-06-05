@@ -6,6 +6,7 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 
 import InputOutput.AbstractImageSource;
+import InputOutput.SaveImageSource;
 
 /*This class is a Thread which starts after the user press a start button. It takes the frames continuously from the device or a file through an abstract class and then set them on the TestPanel*/
 public class TestFrameThread extends Thread {
@@ -13,6 +14,8 @@ public class TestFrameThread extends Thread {
 	AbstractImageSource imgSrc;
 	BufferedImage bufImg;
 	TestPanel panel;
+	boolean saveVideoOn;
+	SaveImageSource save;
 	
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
@@ -26,17 +29,27 @@ public class TestFrameThread extends Thread {
 				bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
 				panel.setFace(bufImg);
 				panel.fps = imgSrc.fps;
+				
+				if(saveVideoOn == true) {
+					save.saveVideo(mat);
+				}
 
 				try {
-					Thread.sleep(25);
+					Thread.sleep(1000/imgSrc.fps);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				// panel.fps = vc.fps;
+
 				panel.repaint();
 
 			}
 		}
+	}
+	
+	public void saveVideoStart(String path) {
+		save = new SaveImageSource(path + ".avi", imgSrc.fps, mat.width(), mat.height());
+		saveVideoOn = true;
+		
 	}
 
 }
