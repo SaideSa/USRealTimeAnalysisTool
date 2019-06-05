@@ -34,11 +34,6 @@ public class TestFrameThread extends Thread {
 					save.saveVideo(mat);
 				}
 
-				try {
-					Thread.sleep(1000/imgSrc.fps);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 
 				panel.repaint();
 
