@@ -32,6 +32,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	JButton startFile = new JButton("Load File");
 	JButton stop = new JButton("Stop");
 	JButton saveVideo = new JButton("Save Video");
+	JButton saveImage = new JButton("Save Image");
 	JButton stopSaveVideo = new JButton("Stop Saving Video");
 
 	
@@ -65,6 +66,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		buttonPanel.add(startFile);
 		buttonPanel.add(stop);
 		buttonPanel.add(saveVideo);
+		buttonPanel.add(saveImage);
 		buttonPanel.add(stopSaveVideo);
 		startLive.addActionListener(this);
 		startFile.addActionListener(this);
@@ -125,6 +127,22 @@ public class TestFrame extends JFrame implements ActionListener {
 			}
 
 		}
+	
+		if (src == saveImage) {
+			if (!thread.saveVideoOn) {
+				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				int returnVal = fc.showOpenDialog(fc);
+				String fileForSaving = null;
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					fileForSaving = fc.getSelectedFile().getAbsolutePath();
+					thread.saveVideoStart(fileForSaving);
+
+				}
+			}
+		}
+
+		
 		
 		if (src == stopSaveVideo) {
 			if (thread.saveVideoOn) {

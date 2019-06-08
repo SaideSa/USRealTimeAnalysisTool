@@ -1,5 +1,11 @@
 package InputOutput;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.videoio.VideoCapture;
@@ -44,6 +50,25 @@ public class SaveImageSource {
 		writer.write(frameMatrix);
 
 	}
+
+	
+	public void saveImage(BufferedImage bufImg, String path) {
+		
+		File output = new File(path + ".png");
+		
+	
+		try {
+			ImageIO.write(bufImg,"png",output);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+
+		
+	}
+	
+	
 
 	
 
