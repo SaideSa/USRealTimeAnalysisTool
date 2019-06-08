@@ -127,7 +127,7 @@ public class TestFrame extends JFrame implements ActionListener {
 			}
 
 		}
-	
+		/*Filechooser sollte angepasst werden*/
 		if (src == saveImage) {
 			if (!thread.saveVideoOn) {
 				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());

@@ -43,7 +43,7 @@ public class SaveImageSource {
 	}
 	
 	/**
-	 * This method is for storing each Mat object received passed as paramter
+	 * This method is for storing each Mat object received passed as parameter
 	 * @param frameMatrix
 	 */
 	public void writeMat(Mat frameMatrix) {
