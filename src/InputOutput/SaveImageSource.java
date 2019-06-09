@@ -37,8 +37,8 @@ public class SaveImageSource {
 		this.path = path;
 		this.fps = fps;
 		size = new Size(width, height); 
-		int fourcc = VideoWriter.fourcc('M','J','P','G');
-		writer = new VideoWriter(path + "avi", fourcc, 30, size);
+		int fourcc = VideoWriter.fourcc('D','V','I','X');
+		writer = new VideoWriter(path + ".mpg", fourcc, 30, size);
 		
 	}
 	
