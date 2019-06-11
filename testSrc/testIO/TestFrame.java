@@ -116,7 +116,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		if (src == saveVideo) {
 			if (!thread.saveVideoOn) {
 				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-				int returnVal = fc.showOpenDialog(fc);
+				int returnVal = fc.showSaveDialog(fc);
 				String fileForSaving = null;
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -131,7 +131,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		if (src == saveImage) {
 			if (!thread.saveVideoOn) {
 				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-				int returnVal = fc.showOpenDialog(fc);
+				int returnVal = fc.showSaveDialog(fc);
 				String fileForSaving = null;
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
