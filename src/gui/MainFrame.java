@@ -8,176 +8,130 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
-
 public class MainFrame extends Application {
-       
-    public static void main(String[]args) {
-    	
-    }
-
+	
+	ImageView iv = new ImageView();
+	Pane panel = new Pane(iv);
+	BorderPane bp = new BorderPane();
+	
     public void start(Stage s) throws Exception {
+    	// Koordianten d. ImageViews & Punktesetzung
+    	iv.setLayoutX(20);
+        iv.setLayoutY(50);
+        iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	public void handle(MouseEvent e) {     
+        	}
+        });
         
-           //Methode in Testklasse liefert BufferedImage, das in JavaFX Image i konvertiert wird, ImageView erstellt
-          // Image i = SwingFXUtils.toFXImage(Test.us(), null);
-           //ImageView iv = new ImageView(i);
+        // Startbutton zum Start d. Echtzeitdarstellung
+        Button start = new Button("Start");
+        start.setLayoutX(25);
+        start.setLayoutY(450);
+        start.setPrefWidth(80);
+		start.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+			} 
+		});
+		   
+		// Stopbutton zum Beenden d. Echtzeitdarstellung
+        Button stop = new Button("Stop");
+        stop.setLayoutX(125);
+        stop.setLayoutY(450);
+        stop.setPrefWidth(80);
+		stop.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+			} 
+		});
+		
+		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
+        Button reset = new Button("Reset");
+        reset.setLayoutX(600);
+        reset.setLayoutY(100);
+        reset.setPrefWidth(80);
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent e) {
+			} 
+		});
+		
+        // Berechnung d. Abstands
+        Button calc = new Button("Berechnen");
+        calc.setLayoutX(600);
+        calc.setLayoutY(140);
+        calc.setPrefWidth(80);
+        calc.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent e) {
+			} 
+		});
+        
+        // zeigt Ergebnis d. Abstandberechnung an
+        Text erg = new Text("Abstand: ");
+        erg.setLayoutX(600);
+        erg.setLayoutY(200);
+        erg.setFont(new Font(16));
+       
+        // friert Echtzeitdarstellung ein, (um ein einzelnes USBild zu speichern)
+        Button freeze = new Button("Freeze");
+        freeze.setLayoutX(225);
+        freeze.setLayoutY(450);
+        freeze.setPrefWidth(80);
+        freeze.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent e) {
+        		OtherFrames.freezeWindow();
+			} 
+		});
            
-           //Menubar mit Optionen wird erstellt
-           MenuBar menuBar = new MenuBar();
-           Menu options = new Menu("Einstellungen");
-           Menu help = new Menu("Hilfe");
-            
-           MenuItem save = new MenuItem("Speichern");
-           save.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
-           MenuItem load = new MenuItem("Laden");
-           load.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
-           MenuItem file = new MenuItem("Speicherort festlegen");
-           MenuItem manual = new MenuItem("Bedienungshilfe");
-           manual.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
-           
-           
-           
-           options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), file);
-           help.getItems().add(manual);
-           menuBar.getMenus().addAll(options, help);
-          
-           // auf Panel wird UsBild gesetzt mit X,Y-Koordinaten, auf BorderPane wird menuBar & Panel gesetzt
-           Pane hauptfenster = new Pane();
-           //iv.setLayoutX(20);
-           //iv.setLayoutY(50);
-           BorderPane bp = new BorderPane();
-           bp.setTop(menuBar);
-           bp.setCenter(hauptfenster);
-           
+     
+        MenuBar menuBar = new MenuBar();
+        	Menu options = new Menu("Einstellungen");
+        	Menu help = new Menu("Hilfe");
+        		// MenuItem zur Speicherung d. eingefrorenen USBildes (wenn Speicherort gesetzt)
+        		MenuItem save = new MenuItem("Speichern");
+                save.setOnAction(new EventHandler<ActionEvent>() {
+                	public void handle(ActionEvent e) {
+        			} 
+        		});
+        		save.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        		
+        		// MenuItem zum Laden eines einzelnen USBildes
+        		MenuItem load = new MenuItem("Laden");
+                load.setOnAction(new EventHandler<ActionEvent>() {
+                	public void handle(ActionEvent e) {
+                		try {
+                			iv.setImage(Test.getImage());
+                		} catch(Exception ex) {
+                			System.out.println("Fehler beim Laden");
+                		}
+        			} 
+        		});
+        		load.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
+        		
+        		// MenuItem zur Festlegung d. Speicherorts für zu speichernde USBilder
+        		MenuItem file = new MenuItem("Speicherort festlegen");
+                file.setOnAction(new EventHandler<ActionEvent>() {
+                	public void handle(ActionEvent e) {
+        			} 
+        		});
+        		
+                //Bedienungshilfe?
+        		MenuItem manual = new MenuItem("Bedienungshilfe");
+        		manual.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+        		
+        	options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), file);
+        	help.getItems().add(manual);
+        menuBar.getMenus().addAll(options, help);
          
-           // Berechnen-Button mit ActionHandler erstellt & auf Panel mit X,Y-Koordinaten platziert
-           Button berechnen = new Button("Berechnen");
-           hauptfenster.getChildren().add(berechnen);
-           berechnen.setLayoutX(500);  
-           berechnen.setLayoutY(50);
-           berechnen.setOnAction(new EventHandler<ActionEvent>() {
-           public void handle(ActionEvent e) {
-                   
-               }
-           });
-        //Freeze Fenster erstellt, welches ein Neues Fenster öffnet
-        Button b1 = new Button("Freeze");
-       	hauptfenster.getChildren().add(b1);
-       	b1.setText("Freeze");
-       	String so= b1.getText();
-       	b1.setLayoutX(600);
-       	b1.setLayoutY(500);
-       	b1.setOnAction(new EventHandler<ActionEvent>() {
-             	 
-       	     
-               public void handle(ActionEvent event) {
-               	
-
-              	 
-                   StackPane secondaryLayout = new StackPane();
-
-    
-                   Scene secondScene = new Scene(secondaryLayout, 500, 300);
-    
-                   // New window (Stage)
-                   Stage newWindow = new Stage();
-                   newWindow.setTitle("Freeze");
-                   newWindow.setScene(secondScene);
-    
-    
-                   newWindow.show();
-               }
-           });
-           
-           
-           // Ergebnis-Label erstellt & auf Panel mit X,Y-Koordinaten platziert
-           Label ergebnis = new Label("Ergebnis:");
-           hauptfenster.getChildren().add(ergebnis);
-           ergebnis.setLayoutX(500);        
-           ergebnis.setLayoutY(120);
-           
-           // Ergebnis-Textfeld erstellt & auf Panel mit X,Y-Koordinaten platziert
-           TextField tf = new TextField();
-           hauptfenster.getChildren().add(tf);
-           tf.setLayoutX(560);
-           tf.setLayoutY(120);
-           
-           // Reset-Button mit ActionHandler erstellt & auf Panel mit X,Y-Koordinaten platziert
-           Button reset = new Button("Reset");
-           hauptfenster.getChildren().add(reset);
-           reset.setLayoutX(500);
-           reset.setLayoutY(80);
-          
-           // Punkt A - Label 
-           Label punktA = new Label ("Punkt A : ");
-           hauptfenster.getChildren().add(punktA);
-           punktA.setLayoutX(500);
-           punktA.setLayoutY(160);
-           
-           // X- Label 
-           Label x = new Label ("X:");
-           hauptfenster.getChildren().add(x);
-           x.setLayoutX(500);
-           x.setLayoutY(200);
-           
-           //X-Textfeld
-           TextField tfx = new TextField();
-           hauptfenster.getChildren().add(tfx);
-           tfx.setLayoutX(560);
-           tfx.setLayoutY(200);
-
-           // Y - Label 
-           Label y = new Label ("Y:");
-           hauptfenster.getChildren().add(y);
-           y.setLayoutX(500);
-           y.setLayoutY(240);
-           
-           //Y-Textfeld
-           TextField tfy = new TextField();
-           hauptfenster.getChildren().add(tfy);
-           tfy.setLayoutX(560);
-           tfy.setLayoutY(240);
-           
-           // Punkt B - Label 
-           Label punktB = new Label ("Punkt B : ");
-           hauptfenster.getChildren().add(punktB);
-           punktB.setLayoutX(500);
-           punktB.setLayoutY(300);
-           
-           // X- Label 
-           Label xb = new Label ("X:");
-           hauptfenster.getChildren().add(xb);
-           xb.setLayoutX(500);
-           xb.setLayoutY(380);
-           
-           //X-Textfeld
-           TextField tfxb = new TextField();
-           hauptfenster.getChildren().add(tfxb);
-           tfxb.setLayoutX(560);
-           tfxb.setLayoutY(380);
-
-           // Y - Label 
-           Label yb = new Label ("Y:");
-           hauptfenster.getChildren().add(yb);
-           yb.setLayoutX(500);
-           yb.setLayoutY(420);
-           
-           //Y-Textfeld
-           TextField tfyb = new TextField();
-           hauptfenster.getChildren().add(tfyb);
-           tfyb.setLayoutX(560);
-           tfyb.setLayoutY(420);
-        
-           
-           // Hauptfenster (900x500) mit Titel wird dargestellt
-           s.setResizable(false);
-           s.setTitle("USRealTimeAnalysisTool");        
-           s.setScene(new Scene(bp, 1000, 600));    
-           s.show();
+        // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
+        bp.setTop(menuBar);
+        bp.setCenter(panel);
+        panel.getChildren().addAll(start, stop, reset, calc, erg, freeze);
+        s.setResizable(false);
+        s.setTitle("USRealTimeAnalysisTool");        
+        s.setScene(new Scene(bp, 1000, 600));    
+        s.show();
            
     }
 }
