@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
@@ -22,7 +24,9 @@ public class MainFrame extends Application {
 	Pane panel = new Pane(iv);
 	BorderPane bp = new BorderPane();
 	
-	public String savelocation;
+	String savelocation;
+	boolean freezestatus = false;
+	boolean connectionstatus = false;
 		
     public void start(Stage s) throws Exception {
     	// Koordianten d. ImageViews & Punktesetzung
@@ -33,6 +37,37 @@ public class MainFrame extends Application {
         	}
         });
         
+        // TextArea als Konsole mit Label
+        TextArea ta = new TextArea();
+        ta.setLayoutX(710);
+        ta.setLayoutY(60);
+        ta.setPrefWidth(275);
+        ta.setPrefHeight(425);
+        ta.setEditable(false);
+        
+        Text console = new Text("Konsole:");
+        console.setLayoutX(710);
+        console.setLayoutY(50);
+        console.setFont(new Font(16));
+        
+        //zeigt an, ob es eine Verbindung zum USGerät gibt (provisorisch)
+        Rectangle connection = new Rectangle(30,30);
+        connection.setLayoutX(20);
+        connection.setLayoutY(10);
+        connection.setStroke(Color.BLACK);
+        Text connecttxt = new Text();
+        connecttxt.setLayoutX(60);
+        connecttxt.setLayoutY(30);
+        connecttxt.setFont(new Font(16));
+        
+        if(connectionstatus == false) {
+        	connection.setFill(Color.RED);
+        	connecttxt.setText("Keine Verbindung...");
+        } else {
+        	connection.setFill(Color.GREEN);
+        	connecttxt.setText("Verbunden!");
+        }
+        
         // Startbutton zum Start d. Echtzeitdarstellung
         Button start = new Button("Start");
         start.setLayoutX(25);
@@ -40,7 +75,7 @@ public class MainFrame extends Application {
         start.setPrefWidth(80);
 		start.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				System.out.println("Echtzeitdarstellung gestartet!");
+				ta.appendText("Echtzeitdarstellung gestartet!\n");
 			} 
 		});
 		   
@@ -51,37 +86,49 @@ public class MainFrame extends Application {
         stop.setPrefWidth(80);
 		stop.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				System.out.println("Echtzeitdarstellung gestoppt!");
+				ta.appendText("Echtzeitdarstellung gestoppt!\n");
 			} 
 		});
 		
 		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
         Button reset = new Button("Reset");
-        reset.setLayoutX(600);
-        reset.setLayoutY(100);
+        reset.setLayoutX(580);
+        reset.setLayoutY(120);
         reset.setPrefWidth(80);
         reset.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
-        		System.out.println("Gesetzte Punkte resettet!");
+        		ta.appendText("Gesetzte Punkte resettet!\n");
 			} 
 		});
 		
         // Berechnung d. Abstands
         Button calc = new Button("Berechnen");
-        calc.setLayoutX(600);
-        calc.setLayoutY(140);
+        calc.setLayoutX(580);
+        calc.setLayoutY(80);
         calc.setPrefWidth(80);
         calc.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
-        		System.out.println("Abstand berechnet!");
+        		ta.appendText("Abstand berechnet\n");
 			} 
 		});
         
+        Text abst = new Text("Abstand:");
+        abst.setLayoutX(580);
+        abst.setLayoutY(50);
+        abst.setFont(new Font(16));
+        
         // zeigt Ergebnis d. Abstandberechnung an
-        Text erg = new Text("Abstand: ");
-        erg.setLayoutX(600);
-        erg.setLayoutY(200);
-        erg.setFont(new Font(16));
+        Text erg = new Text("Ergebnis:");
+        erg.setLayoutX(580);
+        erg.setLayoutY(190);
+        erg.setFont(new Font(14));
+        
+        TextField tf = new TextField("");
+        tf.setLayoutX(580);
+        tf.setLayoutY(200);
+        tf.setEditable(false);
+        tf.setPrefWidth(80);
+        
        
         // friert Echtzeitdarstellung ein, (um ein einzelnes USBild zu speichern)
         Button freeze = new Button("Freeze");
@@ -90,12 +137,21 @@ public class MainFrame extends Application {
         freeze.setPrefWidth(80);
         freeze.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
-        		OtherFrames.freezeWindow();
-        		System.out.println("Fenster eingefroren!");
+        		if(freezestatus == false) {
+        			//OtherFrames.startFreeze();
+        			ta.appendText("Fenster eingefroren!\n");
+        			freezestatus = true;
+        			freeze.setStyle("-fx-background-color: #00ffff; ");
+        			freeze.setText("Unfreeze");
+        		} else {
+        			ta.appendText("Fenster aufgetaut!\n");
+        			freezestatus = false;
+        			freeze.setStyle(null);
+        			freeze.setText("Freeze");
+        		}
 			} 
 		});
-           
-     
+        
         MenuBar menuBar = new MenuBar();
         	Menu options = new Menu("Optionen");
         	Menu help = new Menu("Hilfe");
@@ -109,7 +165,7 @@ public class MainFrame extends Application {
     				File file = dc.showDialog(s);
     				if(file != null) {
     						savelocation = file.getAbsolutePath();
-    						System.out.println("Speicherort zu \"" + savelocation + "\" geändert!");
+    						ta.appendText("Speicherort zu \"" + savelocation + "\" geändert!\n");
     					}
     				} 
     			});
@@ -129,18 +185,18 @@ public class MainFrame extends Application {
                 			if(file != null) {                			
                 				try {
                 					ImageIO.write(SwingFXUtils.fromFXImage(iv.getImage(), null), "png", file);
-                					System.out.println("Bild erfolgreich auf \"" + file.getAbsolutePath() + "\" gespeichert!");
+                					ta.appendText("Bild erfolgreich auf \"" + file.getAbsolutePath() + "\" gespeichert!\n");
                 				} catch (Exception ex) {
-                					System.out.println("Bild konnte nicht gespeichert werden!");
+                					ta.appendText("Bild konnte nicht gespeichert werden!\n");
                 				}	
                 			}
                 		} else {
                 			File file = new File(savelocation);
                 			try {
 								ImageIO.write(SwingFXUtils.fromFXImage(iv.getImage(), null), "png", file);
-								System.out.println("Bild erfolgreich auf \"" + savelocation + "\" gespeichert!");
+								ta.appendText("Bild erfolgreich auf \"" + savelocation + "\" gespeichert!");
 							} catch (Exception ex) {
-								System.out.println("Bild konnte nicht gespeichert werden!");
+								ta.appendText("Bild konnte nicht gespeichert werden!\n");
 							}
                 		}	
         			} 
@@ -153,9 +209,9 @@ public class MainFrame extends Application {
                  	public void handle(ActionEvent e) {
                  		if(iv.getImage() != null) {
                  			iv.setImage(null);
-                 			System.out.println("Bild enfernt!");
+                 			ta.appendText("Bild entfernt!\n");
                  		} else {
-                 			System.out.println("Es gibt kein Bild zum entfernen!");
+                 			ta.appendText("Es gibt kein Bild zum entfernen!\n");	
                  		}
                  	}
         		 });
@@ -173,9 +229,8 @@ public class MainFrame extends Application {
                 		File file = fc.showOpenDialog(s);
                 		if(file != null) {
                 			Image i = new Image(file.toURI().toString());
-                			//Image i = new Image(file.getAbsolutePath());
                 			iv.setImage(i);
-                			System.out.println("Bild erfolgreich geladen!");
+                			ta.appendText("Bild erfolgreich geladen!\n");
                 		} 
                 	}
         		});
@@ -193,7 +248,7 @@ public class MainFrame extends Application {
         // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
         bp.setTop(menuBar);
         bp.setCenter(panel);
-        panel.getChildren().addAll(start, stop, reset, calc, erg, freeze);
+        panel.getChildren().addAll(start, stop, reset, calc, erg, freeze, ta, console, abst, tf, connection, connecttxt);
         s.setResizable(false);
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1000, 600));    
