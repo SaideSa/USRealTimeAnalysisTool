@@ -27,6 +27,7 @@ public class MainFrame extends Application {
 	String savelocation;
 	boolean freezestatus = false;
 	boolean connectionstatus = false;
+	boolean running = false;
 		
     public void start(Stage s) throws Exception {
     	// Koordianten d. ImageViews & Punktesetzung
@@ -45,10 +46,10 @@ public class MainFrame extends Application {
         ta.setPrefHeight(425);
         ta.setEditable(false);
         
-        Text console = new Text("Konsole:");
-        console.setLayoutX(710);
-        console.setLayoutY(50);
-        console.setFont(new Font(16));
+        Text output = new Text("Ausgaben:");
+        output.setLayoutX(710);
+        output.setLayoutY(50);
+        output.setFont(new Font(16));
         
         //zeigt an, ob es eine Verbindung zum USGerät gibt (provisorisch)
         Rectangle connection = new Rectangle(30,30);
@@ -68,28 +69,40 @@ public class MainFrame extends Application {
         	connecttxt.setText("Verbunden!");
         }
         
-        // Startbutton zum Start d. Echtzeitdarstellung
-        Button start = new Button("Start");
-        start.setLayoutX(25);
-        start.setLayoutY(450);
-        start.setPrefWidth(80);
-		start.setOnAction(new EventHandler<ActionEvent>() {
+        // Labels für die fps/Latenzanzeigen
+        Text fps = new Text("fps: ");
+        fps.setLayoutX(25);
+        fps.setLayoutY(65);
+        fps.setFont(new Font(14));
+        fps.setFill(Color.WHITE);
+        fps.setVisible(false);
+        Text latency = new Text(" / latenz: " + "m/s");
+        latency.setLayoutX(80);
+        latency.setLayoutY(65);
+        latency.setFont(new Font(14));
+        latency.setFill(Color.WHITE);
+        latency.setVisible(false);
+        
+        // Start/Stoppbutton zum Start/Stopp d. Echtzeitdarstellung
+        Button startstop = new Button("Start");
+        startstop.setLayoutX(25);
+        startstop.setLayoutY(450);
+        startstop.setPrefWidth(80);
+		startstop.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				ta.appendText("Echtzeitdarstellung gestartet!\n");
+				if(running == false) {
+					startstop.setText("Stop");
+					ta.appendText("Echtzeitdarstellung gestartet!\n");
+					running = true;
+				} else {
+					startstop.setText("Start");
+					ta.appendText("Echtzeitdarstellung gestoppt!\n");
+					running = false;
+				}
 			} 
 		});
 		   
-		// Stopbutton zum Beenden d. Echtzeitdarstellung
-        Button stop = new Button("Stop");
-        stop.setLayoutX(125);
-        stop.setLayoutY(450);
-        stop.setPrefWidth(80);
-		stop.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				ta.appendText("Echtzeitdarstellung gestoppt!\n");
-			} 
-		});
-		
+
 		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
         Button reset = new Button("Reset");
         reset.setLayoutX(580);
@@ -129,10 +142,9 @@ public class MainFrame extends Application {
         tf.setEditable(false);
         tf.setPrefWidth(80);
         
-       
         // friert Echtzeitdarstellung ein, (um ein einzelnes USBild zu speichern)
         Button freeze = new Button("Freeze");
-        freeze.setLayoutX(225);
+        freeze.setLayoutX(125);
         freeze.setLayoutY(450);
         freeze.setPrefWidth(80);
         freeze.setOnAction(new EventHandler<ActionEvent>() {
@@ -141,12 +153,10 @@ public class MainFrame extends Application {
         			//OtherFrames.startFreeze();
         			ta.appendText("Fenster eingefroren!\n");
         			freezestatus = true;
-        			freeze.setStyle("-fx-background-color: #00ffff; ");
         			freeze.setText("Unfreeze");
         		} else {
         			ta.appendText("Fenster aufgetaut!\n");
         			freezestatus = false;
-        			freeze.setStyle(null);
         			freeze.setText("Freeze");
         		}
 			} 
@@ -248,7 +258,7 @@ public class MainFrame extends Application {
         // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
         bp.setTop(menuBar);
         bp.setCenter(panel);
-        panel.getChildren().addAll(start, stop, reset, calc, erg, freeze, ta, console, abst, tf, connection, connecttxt);
+        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency);
         s.setResizable(false);
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1000, 600));    
