@@ -79,6 +79,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		stop.addActionListener(this);
 		saveVideo.addActionListener(this);
 		stopSaveVideo.addActionListener(this);
+		saveImage.addActionListener(this);
 		startLiveIGT.addActionListener(this);
 
 		main.add(buttonPanel, BorderLayout.PAGE_END);
@@ -144,14 +145,14 @@ public class TestFrame extends JFrame implements ActionListener {
 		}
 		/*Filechooser sollte angepasst werden*/
 		if (src == saveImage) {
-			if (!thread.saveVideoOn) {
+			if (true) {
 				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 				int returnVal = fc.showSaveDialog(fc);
 				String fileForSaving = null;
 
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					fileForSaving = fc.getSelectedFile().getAbsolutePath();
-					thread.saveVideoStart(fileForSaving);
+					thread.saveImageStart(fileForSaving);
 
 				}
 			}

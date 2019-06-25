@@ -58,5 +58,11 @@ public class TestFrameThread extends Thread {
 		saveVideoOn = false;
 		
 	}
+	
+	public void saveImageStart(String path) {
+		
+		save.saveImage(bufImg, path);
+		
+	}
 
 }
