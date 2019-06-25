@@ -5,6 +5,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -39,15 +45,14 @@ public class SaveImageSource {
 		this.path = path;
 		this.fps = fps;
 		size = new Size(width, height); 
-		int fourcc = VideoWriter.fourcc('M','J','P','G');
-		writer = new VideoWriter(path + ".avi", fourcc, 30, size);
-		System.out.println(path);
-		
+
+		int fourcc = VideoWriter.fourcc('D','V','I','X');
+		writer = new VideoWriter(path + ".mpg", fourcc, 30, size);
 		
 	}
 	
 	/**
-	 * This method is for storing each Mat object received passed as paramter
+	 * This method is for storing each Mat object received passed as parameter
 	 * @param frameMatrix
 	 */
 	public void writeMat(Mat frameMatrix) {
@@ -83,6 +88,25 @@ public class SaveImageSource {
 		}
 
 	}
+
+	
+	public void saveImage(BufferedImage bufImg, String path) {
+		
+		File output = new File(path + ".png");
+		
+	
+		try {
+			ImageIO.write(bufImg,"png",output);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+
+		
+	}
+	
+	
 
 	
 
