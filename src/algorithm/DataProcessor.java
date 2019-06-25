@@ -80,7 +80,7 @@ class DataProcessor {
 			 *            the {@link Mat} object in BGR or grayscale
 			 * @return the corresponding {@link BufferedImage}
 			 */
-			private static BufferedImage matToBufferedImage(Mat original)
+			 BufferedImage matToBufferedImage(Mat original)
 			{
 				// init
 				BufferedImage image = null;
@@ -123,7 +123,7 @@ class DataProcessor {
 			 * The action triggered by pushing the button on the GUI
 			 */
 			@FXML
-			private void startCamera()
+			 void startCamera()
 			{
 				new SimpleObjectProperty<>();
 						
