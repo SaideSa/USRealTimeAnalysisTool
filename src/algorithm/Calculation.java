@@ -25,7 +25,7 @@ public class Calculation extends DataManager{
 		double ankathete1 = tempbox3.y - tempbox1.y;
 		double ankathete2 = tempbox3.x - tempbox2.x;
 		
-		// Umrechnung für 1024x768 Bild in mm
+		// Umrechnung für 1024x768 Bild in mm (Sonde 3S)
 		ankathete1 = ankathete1 * 0.256;
 		ankathete2 = ankathete2 * 0.274;
 		
