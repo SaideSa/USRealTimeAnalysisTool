@@ -10,7 +10,6 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 import org.opencv.videoio.VideoCapture;
 
-import U.Utils;
 import inputOutput.FilestreamSource;
 import inputOutput.AbstractImageSource;
 import inputOutput.LivestreamSource;
@@ -27,38 +26,6 @@ class DataProcessor {
 	
 	
 
-		 
-		AbstractImageSource src;
-		
-		
-		 void start(String filesrc) { 
-			 if (filesrc == null) {
-					this.src = new LivestreamSource(0);
-					}
-					else {
-						this.src = new FilestreamSource(filesrc); 
-					}
-					
-					this.src.openConnection(); // für hardware Exeption zb "File Not Found"
-							
-				}
-		
-		
-		
-		 BufferedImage getNextImage() {
-			if (this.src.isConnected) {
-			return (BufferedImage) HighGui.toBufferedImage(this.src.getNextMat());
-			}
-			else {
-				return null;
-			}
-		}
-		
-		
-		 void stop() {
-			this.src.closeConnection();
-			
-		}
 
 		
 		 BufferedImage readBufImg() {
@@ -182,7 +149,7 @@ class DataProcessor {
 								// effectively grab and process a single frame
 								Mat frame = grabFrame();
 								// convert and show the frame
-								Image imageToShow = Utils.mat2Image(frame);
+								Image imageToShow = DataProcessor.mat2Image(frame);
 								updateImageView(originalFrame, imageToShow);
 							}
 						};
@@ -296,7 +263,7 @@ class DataProcessor {
 			 */
 			private void updateImageView(ImageView view, Image image)
 			{
-				Utils.onFXThread(view.imageProperty(), image);
+				DataProcessor.onFXThread(view.imageProperty(), image);
 			}
 			
 			/**
@@ -311,7 +278,39 @@ class DataProcessor {
 
 	}
 
+/* 
+AbstractImageSource src;
 
+
+ void start(String filesrc) { 
+	 if (filesrc == null) {
+			this.src = new LivestreamSource(0);
+			}
+			else {
+				this.src = new FilestreamSource(filesrc); 
+			}
+			
+			this.src.openConnection(); // für hardware Exeption zb "File Not Found"
+					
+		}
+
+
+
+	BufferedImage getNextImage() {
+	if (this.src.isConnected) {
+	return (BufferedImage) HighGui.toBufferedImage(this.src.getNextMat());
+	}
+	else {
+		return null;
+	}
+}
+
+
+ // void stop() {
+	// this.src.closeConnection();
+	
+// }
+*/
 
 
 
