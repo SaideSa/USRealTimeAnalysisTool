@@ -27,6 +27,12 @@ public class TestFrameThread extends Thread {
 		if (imgSrc.openConnection()) {
 			while (imgSrc.isConnected) {
 				mat = imgSrc.getNextMat();
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
 				panel.setFace(bufImg);
 				panel.fps = imgSrc.fps;

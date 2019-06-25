@@ -28,7 +28,8 @@ public class TestFrame extends JFrame implements ActionListener {
 								// the frames
 
 	JPanel buttonPanel = new JPanel();
-	JButton startLive = new JButton("Start LiveStram");
+	JButton startLive = new JButton("Start LiveStream");
+	JButton startLiveIGT = new JButton("Start LiveStream with OpenIGT");
 	JButton startFile = new JButton("Load File");
 	JButton stop = new JButton("Stop");
 	JButton saveVideo = new JButton("Save Video");
@@ -60,17 +61,23 @@ public class TestFrame extends JFrame implements ActionListener {
 		startLive.setSize(100, 20);
 		startFile.setSize(100, 20);
 		stop.setSize(100, 20);
+		startLiveIGT.setSize(100, 20);
 		saveVideo.setSize(100, 20);
 		buttonPanel.add(startLive);
+		buttonPanel.add(startLiveIGT);
 		buttonPanel.add(startFile);
 		buttonPanel.add(stop);
 		buttonPanel.add(saveVideo);
 		buttonPanel.add(stopSaveVideo);
+		
+		
 		startLive.addActionListener(this);
+		startLiveIGT.addActionListener(this);
 		startFile.addActionListener(this);
 		stop.addActionListener(this);
 		saveVideo.addActionListener(this);
 		stopSaveVideo.addActionListener(this);
+		startLiveIGT.addActionListener(this);
 
 		main.add(buttonPanel, BorderLayout.PAGE_END);
 
@@ -88,6 +95,14 @@ public class TestFrame extends JFrame implements ActionListener {
 			thread = new TestFrameThread(videoPanel, imgSrc);
 
 		}
+
+		if (src == buttonPanel.add(startLiveIGT)) {
+			OpenIGTImageSource openIGT = new OpenIGTImageSource();
+			imgSrc = openIGT;
+			thread = new TestFrameThread(videoPanel, imgSrc);
+
+		}
+
 
 		if (src == startFile) {
 			// filechooser will open the explorer;
@@ -132,7 +147,7 @@ public class TestFrame extends JFrame implements ActionListener {
 			}
 
 		}
-
+		
 	}
 
 	public static void startTestMainCV() {

@@ -1,0 +1,1 @@
+Mat [ 0*0*CV_8UC1, isCont=false, isSubmat=false, nativeObj=0x21612700, dataAddr=0x0 ]

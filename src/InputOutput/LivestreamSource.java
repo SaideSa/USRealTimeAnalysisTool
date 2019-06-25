@@ -6,6 +6,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 /**
@@ -53,6 +54,10 @@ public class LivestreamSource extends AbstractImageSource {
 			isConnected = false;
 		}
 
+			int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
+		    vc.set(Videoio.CAP_PROP_FOURCC, fourcc);
+//		    vc.set(Videoio.CAP_PROP_FRAME_WIDTH, CAP_FRAME_WIDTH);
+//		    vc.set(Videoio.CAP_PROP_FRAME_HEIGHT, CAP_FRAME_HEIGHT);
 		return isConnected;
 	}
 

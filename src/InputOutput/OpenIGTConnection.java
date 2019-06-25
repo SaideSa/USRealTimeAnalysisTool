@@ -1,5 +1,7 @@
 package InputOutput;
 
+import java.util.ArrayList;
+
 import org.medcare.igtl.messages.ImageMessage;
 import org.medcare.igtl.network.GenericIGTLinkClient;
 import org.medcare.igtl.network.IOpenIgtPacketListener;
@@ -19,7 +21,9 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	private GenericIGTLinkClient client;
 	private ImageMessage imgMsg;
 	private String name;
-
+	private byte[] imgData;
+	
+	
 	public OpenIGTConnection(String ip, int port) {
 
 		try {
@@ -40,13 +44,37 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 
 	@Override
 	public void onRxImage(String name, ImageMessage image) {
-		imgMsg = image;
+		setImageMessage(image);
+		
+		try {
+			image.UnpackBody();
+			
+			setImageDataByte(image.getImageData());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		this.name = name;
 
 	}
 
 	public ImageMessage getImageMessage() {
 		return imgMsg;
+	}
+
+	public void setImageMessage(ImageMessage img) {
+
+		imgMsg = img;
+	}
+	
+	public void setImageDataByte(byte[] imgData) {
+
+		this.imgData = imgData;
+	}
+	
+	public byte[] getImageDataByte() {
+
+		return imgData;
 	}
 
 	public boolean stop() {
