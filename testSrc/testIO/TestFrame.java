@@ -23,13 +23,19 @@ import InputOutput.*;
 
 /*This class needs TestPanel and TestFrameThread to work properly*/
 public class TestFrame extends JFrame implements ActionListener {
-	
-	JPanel main = new JPanel(); //this panel will contain a panel for buttons and another panel for painting the frames
-	
+
+	JPanel main = new JPanel(); // this panel will contain a panel for buttons and another panel for painting
+								// the frames
+
 	JPanel buttonPanel = new JPanel();
-	JButton startLive = new JButton("Start LiveStram");
+	JButton startLive = new JButton("Start LiveStream");
+	JButton startLiveIGT = new JButton("Start LiveStream with OpenIGT");
 	JButton startFile = new JButton("Load File");
 	JButton stop = new JButton("Stop");
+	JButton saveVideo = new JButton("Save Video");
+	JButton saveImage = new JButton("Save Image");
+	JButton stopSaveVideo = new JButton("Stop Saving Video");
+
 	
 	TestPanel videoPanel = new TestPanel();
 	AbstractImageSource imgSrc;
@@ -37,13 +43,12 @@ public class TestFrame extends JFrame implements ActionListener {
 	BufferedImage bufImg;
 	TestFrameThread thread;
 
-
 	public TestFrame() {
-	
+
 		init();
-	
+
 	}
-	
+
 	public void init() {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,23 +56,36 @@ public class TestFrame extends JFrame implements ActionListener {
 
 		main.setLayout(new BorderLayout());
 		main.add(videoPanel, BorderLayout.CENTER);
-	
-		/*Panel with three Buttons: startLive, startFile, stop*/
+
+		/* Panel with three Buttons: startLive, startFile, stop */
 		buttonPanel.setLayout(new FlowLayout());
 		startLive.setSize(100, 20);
 		startFile.setSize(100, 20);
 		stop.setSize(100, 20);
+		startLiveIGT.setSize(100, 20);
+		saveVideo.setSize(100, 20);
 		buttonPanel.add(startLive);
+		buttonPanel.add(startLiveIGT);
 		buttonPanel.add(startFile);
 		buttonPanel.add(stop);
+		buttonPanel.add(saveVideo);
+		buttonPanel.add(saveImage);
+		buttonPanel.add(stopSaveVideo);
+		
+		
 		startLive.addActionListener(this);
+		startLiveIGT.addActionListener(this);
 		startFile.addActionListener(this);
 		stop.addActionListener(this);
+		saveVideo.addActionListener(this);
+		stopSaveVideo.addActionListener(this);
+		saveImage.addActionListener(this);
+		startLiveIGT.addActionListener(this);
 
 		main.add(buttonPanel, BorderLayout.PAGE_END);
-		
-		this.setContentPane(main);;
-		
+
+		this.setContentPane(main);
+
 
 	}
 
@@ -80,12 +98,21 @@ public class TestFrame extends JFrame implements ActionListener {
 			thread = new TestFrameThread(videoPanel, imgSrc);
 
 		}
+
+		if (src == buttonPanel.add(startLiveIGT)) {
+			OpenIGTImageSource openIGT = new OpenIGTImageSource();
+			imgSrc = openIGT;
+			thread = new TestFrameThread(videoPanel, imgSrc);
+
+		}
+
+
 		if (src == startFile) {
 			// filechooser will open the explorer;
 			final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 			int returnVal = fc.showOpenDialog(fc);
 			String loadFile = null;
-			
+
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				loadFile = fc.getSelectedFile().getAbsolutePath();
 
@@ -95,21 +122,58 @@ public class TestFrame extends JFrame implements ActionListener {
 
 			}
 		}
-		if(src == stop) {
-			if(imgSrc.closeConnection()) {
+		
+		if (src == stop) {
+			if (imgSrc.closeConnection()) {
 				System.out.println("Connection stopped!");
 			}
 		}
 
+		if (src == saveVideo) {
+			if (!thread.saveVideoOn) {
+				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				int returnVal = fc.showSaveDialog(fc);
+				String fileForSaving = null;
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					fileForSaving = fc.getSelectedFile().getAbsolutePath();
+					thread.saveVideoStart(fileForSaving);
+
+				}
+			}
+
+		}
+		/*Filechooser sollte angepasst werden*/
+		if (src == saveImage) {
+			if (true) {
+				final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				int returnVal = fc.showSaveDialog(fc);
+				String fileForSaving = null;
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					fileForSaving = fc.getSelectedFile().getAbsolutePath();
+					thread.saveImageStart(fileForSaving);
+
+				}
+			}
+		}
+
+		
+		
+		if (src == stopSaveVideo) {
+			if (thread.saveVideoOn) {
+				thread.stopSave();
+			}
+
+		}
+		
 	}
 
-	
 	public static void startTestMainCV() {
 		TestFrame frame = new TestFrame();
 		frame.validate();
 		frame.setVisible(true);
-		
-	}
 
+	}
 
 }
