@@ -4,7 +4,7 @@ package testIO;
 
 public class ConnectionAndDisplayTest extends Thread {
 	public static void main(String args[]) {
-		TestFrame.startTestMainCV();
+		TestFrame.startTestMainCV1();
 		//test ob es wieder geht im Master
 	}
 
