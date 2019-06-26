@@ -39,9 +39,9 @@ public class DataManager {
 	}*/
 	
 	/*public void stop() {
-		d.stop();*/
+		d.stop();
 	}
-	
+	*/
 	public BufferedImage readBufImg() {
 		return d.readBufImg();
 	}
