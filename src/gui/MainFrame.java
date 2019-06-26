@@ -11,12 +11,15 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import algorithm.*;
 
 public class MainFrame extends Application {
 	
@@ -28,16 +31,12 @@ public class MainFrame extends Application {
 	boolean freezestatus = false;
 	boolean connectionstatus = false;
 	boolean running = false;
+	
+	Circle a = new Circle();
+	Circle b = new Circle();
+	Line l = new Line();
 		
     public void start(Stage s) throws Exception {
-    	// Koordianten d. ImageViews & Punktesetzung
-    	iv.setLayoutX(20);
-        iv.setLayoutY(50);
-        iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-        	public void handle(MouseEvent e) {     
-        	}
-        });
-        
         // TextArea als Konsole mit Label
         TextArea ta = new TextArea();
         ta.setLayoutX(710);
@@ -46,6 +45,58 @@ public class MainFrame extends Application {
         ta.setPrefHeight(425);
         ta.setEditable(false);
         
+    	// Koordianten d. ImageViews & Punktesetzung
+    	iv.setLayoutX(20);
+        iv.setLayoutY(50);
+        iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	public void handle(MouseEvent e) {
+        		if(e.getButton().equals(MouseButton.PRIMARY)) {
+				   panel.getChildren().remove(a);
+				   if(a.getRadius() == 3) {
+					  //DistanceMeasurement.dinge.remove(0);
+				   }
+				   
+				   int x1 = (int) e.getX()+20;
+				   int y1 = (int) e.getY()+50;
+				   a.setCenterX(x1);
+				   a.setCenterY(y1);
+				   a.setRadius(3);
+				   a.setFill(Color.RED);
+				   panel.getChildren().add(a);
+				   ta.appendText("Punkt 1 gesetzt!\n");
+				  
+				   //DistanceMeasurement.dinge.add(0, new Box(x1,y1));
+				   
+			   } else {
+				   panel.getChildren().remove(b);
+				   if(b.getRadius() == 3) {
+					  //DistanceMeasurement.dinge.remove(1); 
+				   }
+				   
+				   int x2 = (int) e.getX()+20;
+				   int y2 = (int) e.getY()+50;
+				   b.setCenterX(x2);
+				   b.setCenterY(y2);
+				   b.setRadius(3);
+				   b.setFill(Color.BLUE);
+				   panel.getChildren().add(b);
+				   ta.appendText("Punkt 2 gesetzt!\n");
+				   //DistanceMeasurement.dinge.add(1, new Box(x2, y2));
+			   }
+			   
+			  if((a.getRadius() == 3)&&(b.getRadius() == 3)) {  
+				  panel.getChildren().remove(l);
+				  l.setStartX(a.getCenterX());
+				  l.setStartY(a.getCenterY());
+				  l.setEndX(b.getCenterX());
+				  l.setEndY(b.getCenterY());
+				  l.setStroke(Color.WHITE);
+				  panel.getChildren().add(l);
+			  }
+        	}
+        });
+        
+
         Text output = new Text("Ausgaben:");
         output.setLayoutX(710);
         output.setLayoutY(50);
@@ -102,34 +153,6 @@ public class MainFrame extends Application {
 			} 
 		});
 		   
-
-		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
-        Button reset = new Button("Reset");
-        reset.setLayoutX(580);
-        reset.setLayoutY(120);
-        reset.setPrefWidth(80);
-        reset.setOnAction(new EventHandler<ActionEvent>() {
-        	public void handle(ActionEvent e) {
-        		ta.appendText("Gesetzte Punkte resettet!\n");
-			} 
-		});
-		
-        // Berechnung d. Abstands
-        Button calc = new Button("Berechnen");
-        calc.setLayoutX(580);
-        calc.setLayoutY(80);
-        calc.setPrefWidth(80);
-        calc.setOnAction(new EventHandler<ActionEvent>() {
-        	public void handle(ActionEvent e) {
-        		ta.appendText("Abstand berechnet\n");
-			} 
-		});
-        
-        Text abst = new Text("Abstand:");
-        abst.setLayoutX(580);
-        abst.setLayoutY(50);
-        abst.setFont(new Font(16));
-        
         // zeigt Ergebnis d. Abstandberechnung an
         Text erg = new Text("Ergebnis:");
         erg.setLayoutX(580);
@@ -141,6 +164,49 @@ public class MainFrame extends Application {
         tf.setLayoutY(200);
         tf.setEditable(false);
         tf.setPrefWidth(80);
+        
+		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
+        Button reset = new Button("Reset");
+        reset.setLayoutX(580);
+        reset.setLayoutY(120);
+        reset.setPrefWidth(80);
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent e) {
+        		ta.appendText("Gesetzte Punkte resettet!\n");
+        		panel.getChildren().remove(a);
+        		panel.getChildren().remove(b);
+        		panel.getChildren().remove(l);
+ 			   	a.setRadius(0);
+ 			   	b.setRadius(0);
+ 			   	//DistanceMeasurement.dinge.clear();
+ 			   	ta.setText("");
+			} 
+		});
+		
+        // Berechnung d. Abstands
+        Button calc = new Button("Berechnen");
+        calc.setLayoutX(580);
+        calc.setLayoutY(80);
+        calc.setPrefWidth(80);
+        calc.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent e) {
+        		ta.appendText("Abstand berechnet!\n");
+            	if((a.getRadius() == 3)&&(b.getRadius() == 3)) { 
+            		//int ergs = DistanceMeasurement.getDistanceBox();
+            		
+            		int tst = 222;
+            		erg.setText(Integer.toString(tst));
+            		
+            	} 
+			} 
+		});
+        
+        Text abst = new Text("Abstand:");
+        abst.setLayoutX(580);
+        abst.setLayoutY(50);
+        abst.setFont(new Font(16));
+        
+
         
         // friert Echtzeitdarstellung ein, (um ein einzelnes USBild zu speichern)
         Button freeze = new Button("Freeze");
