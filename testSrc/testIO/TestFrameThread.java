@@ -8,7 +8,13 @@ import org.opencv.highgui.HighGui;
 import InputOutput.AbstractImageSource;
 import InputOutput.SaveImageSource;
 
-/*This class is a Thread which starts after the user press a start button. It takes the frames continuously from the device or a file through an abstract class and then set them on the TestPanel*/
+
+/**
+ * This class is a Thread which starts after the start button is pressed. 
+ * It takes the frames continuously from the device or a file through an abstract class and then set them on the TestPanel
+ * @author team3
+ *
+ */
 public class TestFrameThread extends Thread {
 	Mat mat;
 	AbstractImageSource imgSrc;

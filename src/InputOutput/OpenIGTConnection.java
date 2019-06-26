@@ -13,8 +13,9 @@ import com.neuronrobotics.sdk.common.Log;
 import Jama.Matrix;
 
 /**
- * This class is for a Connection between
- * @author sahin
+ * This class is for a connection based on OpenIGTLink. As a prerequisite MITK v2016.11 has to run in the background. 
+ * The connection is established by using the online stream. 
+ * @author team3
  *
  */
 public class OpenIGTConnection implements IOpenIgtPacketListener {
@@ -24,13 +25,14 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	private byte[] imgData;
 	
 	
+	/**
+	 * An IP-address and a port number is needed for the connection. Here both are set through the constructor. 
+	 * @param ip
+	 * @param port
+	 */
 	public OpenIGTConnection(String ip, int port) {
 
 		try {
-			// Log.enableDebugPrint(false);
-			// Log.enableSystemPrint(false);
-			//
-			// Log.debug("Starting client");
 			client = new GenericIGTLinkClient(ip, port);
 
 			client.addIOpenIgtOnPacket(this);
