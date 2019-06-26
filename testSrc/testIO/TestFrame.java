@@ -169,7 +169,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		
 	}
 
-	public static void startTestMainCV() {
+	public static void startTestMainCV1() {
 		TestFrame frame = new TestFrame();
 		frame.validate();
 		frame.setVisible(true);
