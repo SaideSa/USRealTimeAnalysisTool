@@ -58,34 +58,7 @@ public class SaveImageSource {
 	public void writeMat(Mat frameMatrix) {
 		writer.write(frameMatrix);
 
-	
-		//ab hier nur Test;
-		count++;
-		
-		if(count == 1) {
-			
-		        try {
-		            File file = new File("C:\\Users\\sahin\\Desktop\\abc.txt");
-		            if (!file.exists()) {
-		               file.createNewFile();
-		            } 
-		            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		            BufferedWriter bw = new BufferedWriter(fw);
-		            
-		            for(int i = 0; i < frameMatrix.rows(); i++) {
-		            	for(int j = 0; j < frameMatrix.cols(); j++) {
-		            		bw.write(frameMatrix.get(i, j) + " ");
-		            	}
-		            }
-		            bw.close();
-		            
-		            System.out.println("Done");
-		         } catch (IOException e) {
-		            e.printStackTrace();
-		         } 
 
-			
-		}
 
 	}
 
@@ -97,11 +70,11 @@ public class SaveImageSource {
 	 */
 	public void saveImage(BufferedImage bufImg, String path) {
 		
-		File output = new File(path + ".png");
+		File output = new File(path + ".jpg");
 		
 	
 		try {
-			ImageIO.write(bufImg,"png",output);
+			ImageIO.write(bufImg,"jpg",output);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="lib/nrsdk-3.9.1-jar-with-dependencies.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCV"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv3.4.6"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
