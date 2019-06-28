@@ -1,7 +1,12 @@
 package gui;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
+
+import InputOutput.AbstractImageSource;
+import InputOutput.LivestreamSource;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.*;
@@ -17,6 +22,13 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
+import org.opencv.core.Mat;
+import org.opencv.highgui.HighGui;
 
 public class MainFrame extends Application {
 	
@@ -28,6 +40,9 @@ public class MainFrame extends Application {
 	boolean freezestatus = false;
 	boolean connectionstatus = false;
 	boolean running = false;
+	
+	Timeline timeline = new Timeline();
+	AbstractImageSource imgSrc;
 		
     public void start(Stage s) throws Exception {
     	// Koordianten d. ImageViews & Punktesetzung
@@ -94,10 +109,12 @@ public class MainFrame extends Application {
 					startstop.setText("Stop");
 					ta.appendText("Echtzeitdarstellung gestartet!\n");
 					running = true;
+					startUpdating();
 				} else {
 					startstop.setText("Start");
 					ta.appendText("Echtzeitdarstellung gestoppt!\n");
 					running = false;
+					stopUpdating();
 				}
 			} 
 		});
@@ -264,5 +281,33 @@ public class MainFrame extends Application {
         s.setScene(new Scene(bp, 1000, 600));    
         s.show();
            
+    }
+    
+    private void startUpdating(){
+		imgSrc = new LivestreamSource(0);
+		imgSrc.openConnection();
+		
+		
+		
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.millis(100),
+                        event -> {
+                            update();
+                        })
+        );
+        timeline.play();
+    }
+    
+    private void stopUpdating(){
+    	timeline.stop();
+    }
+    
+    private void update() {
+        System.out.println("Update");
+        Mat mat = imgSrc.getNextMat();
+        BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
+        Image image = SwingFXUtils.toFXImage(bufImg, null);
+        iv.setImage(image);
     }
 }
