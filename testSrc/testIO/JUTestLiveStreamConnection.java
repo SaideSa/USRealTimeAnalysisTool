@@ -12,7 +12,7 @@ import InputOutput.LivestreamSource;
  * @author sahin
  *
  */
-class TestLiveStreamConnection {
+class JUTestLiveStreamConnection {
 	
 	/**
 	 * This method tests instantiating the class LivestreamSource.
