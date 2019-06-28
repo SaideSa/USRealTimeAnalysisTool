@@ -15,6 +15,7 @@ import InputOutput.SaveImageSource;
  * @author team3
  *
  */
+
 public class TestFrameThread extends Thread {
 	Mat mat;
 	AbstractImageSource imgSrc;
@@ -22,6 +23,7 @@ public class TestFrameThread extends Thread {
 	TestPanel panel;
 	boolean saveVideoOn;
 	SaveImageSource save;
+	boolean threadSleep = false;
 	
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
@@ -33,6 +35,15 @@ public class TestFrameThread extends Thread {
 		if (imgSrc.openConnection()) {
 			while (imgSrc.isConnected) {
 				mat = imgSrc.getNextMat();
+				
+				if(threadSleep == true) {
+					try {
+						Thread.sleep(20);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
 				bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
 				panel.setFace(bufImg);
 				panel.fps = imgSrc.fps;
@@ -62,7 +73,6 @@ public class TestFrameThread extends Thread {
 	public void saveImageStart(String path) {
 		
 		save.saveImage(bufImg, path);
-		
 	}
 
 }

@@ -103,6 +103,7 @@ public class TestFrame extends JFrame implements ActionListener {
 			OpenIGTImageSource openIGT = new OpenIGTImageSource();
 			imgSrc = openIGT;
 			thread = new TestFrameThread(videoPanel, imgSrc);
+			thread.threadSleep = true;
 
 		}
 
