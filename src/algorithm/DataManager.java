@@ -1,14 +1,24 @@
 package algorithm;
 
+
+import InputOutput.AbstractImageSource;
+
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import org.opencv.core.Point;
 
+import javafx.scene.image.*;
+import javafx.animation.Timeline;
+
+
 
 public class DataManager {
 	DistanceMeasurement c = new DistanceMeasurement();
 	DataProcessor d = new DataProcessor();
+	Timeline timeline = new Timeline();
+	AbstractImageSource imgSrc;
+	ImageView iv = new ImageView();
 	
 	public int getDistanceBox() {
 		return c.getDistanceBox();
@@ -30,20 +40,27 @@ public class DataManager {
 		c.MouseListenerReleased(evt);
 	}
 	
-	/* public void start(String filesrc) {
-		d.start(filesrc);
-	}*/ 
-	
-	/*public BufferedImage getNextImage() {
-		return d.getNextImage();
-	}*/
-	
-	/*public void stop() {
-		d.stop();
+	 public void startUpdating(){
+		d.startUpdating();
 	}
-	*/
+	
+
+	public void stopUpdating() {
+		d.stopUpdating();
+	}
+	
+	public void update() {
+		 d.readBufImg();
+	}
+	
 	public BufferedImage readBufImg() {
 		return d.readBufImg();
 	}
+	
+	/*public BufferedImage getNextImage() {
+	return d.getNextImage();
+}*/
 
 }
+	
+

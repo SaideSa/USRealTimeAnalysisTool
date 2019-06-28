@@ -13,6 +13,8 @@ import org.opencv.videoio.VideoCapture;
 import InputOutput.FilestreamSource;
 import InputOutput.AbstractImageSource;
 import InputOutput.LivestreamSource;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,27 +23,55 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import javafx.scene.image.*;
+import javafx.animation.Timeline;
+
+import java.awt.event.MouseEvent;
+
+import org.opencv.core.Point;
+
 
 class DataProcessor {
+		DistanceMeasurement c = new DistanceMeasurement();
+		DataProcessor d = new DataProcessor();
+		Timeline timeline = new Timeline();
+		AbstractImageSource imgSrc;
+		ImageView iv = new ImageView();
 	
-	
-
-
-		
-		 BufferedImage readBufImg() {
+		BufferedImage readBufImg() {
 			BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(null); //readMatFrame()
 			return bufImg;
-		
 		}
+				 
+	  
+	public void startUpdating(){
+		imgSrc = new LivestreamSource(0);
+		imgSrc.openConnection();
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.getKeyFrames().add(
+             new KeyFrame(Duration.millis(100),
+                     event -> {
+                         update();
+                     })
+     );
+     timeline.play();
+	}
+ 
+	public void stopUpdating(){
+ 	timeline.stop();
+	}
+ 
+	private void update() {
+			 System.out.println("Update");
+			 Mat mat = imgSrc.getNextMat();
+			 BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
+			 Image image = SwingFXUtils.toFXImage(bufImg, null);
+			 iv.setImage(image);
+	 }
 
-		
-		 
-		 
-		 //ab hier Utils
-
-		
-		 
-		 
+	
+/*		  
 		 
 		 public static Image mat2Image(Mat frame)
 			{
@@ -65,7 +95,7 @@ class DataProcessor {
 			 * @param value
 			 *            the value to set for the given {@link ObjectProperty}
 			 */
-			public static <T> void onFXThread(final ObjectProperty<T> property, final T value)
+		/*	public static <T> void onFXThread(final ObjectProperty<T> property, final T value)
 			{
 				
 				Platform.runLater(() -> {
@@ -80,7 +110,7 @@ class DataProcessor {
 			 *            the {@link Mat} object in BGR or grayscale
 			 * @return the corresponding {@link BufferedImage}
 			 */
-			 BufferedImage matToBufferedImage(Mat original)
+		/*	 BufferedImage matToBufferedImage(Mat original)
 			{
 				// init
 				BufferedImage image = null;
@@ -123,7 +153,7 @@ class DataProcessor {
 			 * The action triggered by pushing the button on the GUI
 			 */
 			@FXML
-			 void startCamera()
+	/*		 void startCamera()
 			{
 				new SimpleObjectProperty<>();
 						
@@ -183,7 +213,7 @@ class DataProcessor {
 			 * 
 			 * @return the {@link Image} to show
 			 */
-			private Mat grabFrame()
+	/*		private Mat grabFrame()
 			{
 				Mat frame = new Mat();
 				
@@ -218,7 +248,7 @@ class DataProcessor {
 			 * @param dimension
 			 *            the width of the image to set
 			 */
-			private void imageViewProperties(ImageView image, int dimension)
+	/*		private void imageViewProperties(ImageView image, int dimension)
 			{
 				// set a fixed width for the given ImageView
 				image.setFitWidth(dimension);
@@ -229,7 +259,7 @@ class DataProcessor {
 			/**
 			 * Stop the acquisition from the camera and release all the resources
 			 */
-			private void stopAcquisition()
+	/*		private void stopAcquisition()
 			{
 				if (this.timer!=null && !this.timer.isShutdown())
 				{
@@ -261,7 +291,7 @@ class DataProcessor {
 			 * @param image
 			 *            the {@link Image} to show
 			 */
-			private void updateImageView(ImageView view, Image image)
+	/*		private void updateImageView(ImageView view, Image image)
 			{
 				DataProcessor.onFXThread(view.imageProperty(), image);
 			}
@@ -269,7 +299,7 @@ class DataProcessor {
 			/**
 			 * On application close, stop the acquisition from the camera
 			 */
-			protected void setClosed()
+	/*		protected void setClosed()
 			{
 				this.stopAcquisition();
 			}
@@ -306,8 +336,9 @@ AbstractImageSource src;
 }
 
 
- // void stop() {
-	// this.src.closeConnection();
+  		
+  		void stopUpdating() {
+	 	this.src.closeConnection();
 	
 // }
 */
