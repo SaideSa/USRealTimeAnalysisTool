@@ -28,6 +28,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
+import algorithm.DistanceMeasurement;
 
 public class MainFrame extends Application {
 	
@@ -46,6 +47,11 @@ public class MainFrame extends Application {
 	Circle a = new Circle();
 	Circle b = new Circle();
 	Line l = new Line();
+	
+	int x1;
+	int y1;
+	int x2;
+	int y2;
 		
     public void start(Stage s) throws Exception {
     	
@@ -63,36 +69,34 @@ public class MainFrame extends Application {
         iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	public void handle(MouseEvent e) {
             	if(e.getButton().equals(MouseButton.PRIMARY)) {
-     			   panel.getChildren().remove(a);
-     			   if(a.getRadius() == 3) {
-     				  //DistanceMeasurement.dinge.remove(0);
-     			   }
      			   
-     			   int x1 = (int) e.getX()+20;
-     			   int y1 = (int) e.getY()+50;
+     			   if(a.getRadius() == 3) {
+     				  panel.getChildren().remove(a);
+     			   }
+     			   x1 = (int) e.getX()+20;
+     			   y1 = (int) e.getY()+50;
      			   a.setCenterX(x1);
      			   a.setCenterY(y1);
      			   a.setRadius(3);
      			   a.setFill(Color.RED);
+     			   a.setMouseTransparent(true);
      			   panel.getChildren().add(a);
      			   ta.appendText("Punkt 1 gesetzt!\n");
-     			   //DistanceMeasurement.dinge.add(0, new Box(x1,y1));
      			   
      		   } else {
-     			   panel.getChildren().remove(b);
-     			   if(b.getRadius() == 3) {
-     				  //DistanceMeasurement.dinge.remove(1); 
-     			   }
      			   
-     			   int x2 = (int) e.getX()+20;
-     			   int y2 = (int) e.getY()+50;
+     			   if(b.getRadius() == 3) {
+     				   	panel.getChildren().remove(b);
+     			   }
+     			   x2 = (int) e.getX()+20;
+     			   y2 = (int) e.getY()+50;
      			   b.setCenterX(x2);
      			   b.setCenterY(y2);
      			   b.setRadius(3);
      			   b.setFill(Color.BLUE);
+     			   b.setMouseTransparent(true);
      			   panel.getChildren().add(b);
      			   ta.appendText("Punkt 2 gesetzt!\n");
-     			   //DistanceMeasurement.dinge.add(1, new Box(x2, y2));
      		   }
      		   
      		  if((a.getRadius() == 3)&&(b.getRadius() == 3)) {  
@@ -102,6 +106,7 @@ public class MainFrame extends Application {
      			  l.setEndX(b.getCenterX());
      			  l.setEndY(b.getCenterY());
      			  l.setStroke(Color.WHITE);
+     			  l.setMouseTransparent(true);
      			  panel.getChildren().add(l);
      		  }
         	}
@@ -189,6 +194,11 @@ public class MainFrame extends Application {
 					running = false;
 					stopUpdating();
 					iv.setImage(null);
+        			panel.getChildren().remove(a);
+        			panel.getChildren().remove(b);
+        			panel.getChildren().remove(l);
+        			a.setRadius(0);
+        			b.setRadius(0);
 					if(freezestatus == true) {
 						freezestatus = false;
 	        			freeze.setText("Freeze");
@@ -223,7 +233,6 @@ public class MainFrame extends Application {
         			panel.getChildren().remove(l);
         			a.setRadius(0);
         			b.setRadius(0);
- 			   		//DistanceMeasurement.dinge.clear();
  			   		tf.setText("");
         		} else {
         			ta.appendText("Die Punkte können nicht resettet werden,\nweil keine Punkte gesetzt wurden!\n");
@@ -239,10 +248,9 @@ public class MainFrame extends Application {
         calc.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
             	if((a.getRadius() == 3)&&(b.getRadius() == 3)) { 
-            		//int ergs = DistanceMeasurement.getDistanceBox();
+            		int erg = DistanceMeasurement.getDistanceXY(x1, y1, x2, y2);
+            		tf.setText(Integer.toString(erg));
             		ta.appendText("Abstand berechnet!\n");
-            		int tst = 222;
-            		tf.setText(Integer.toString(tst));
             	} else {
             		ta.appendText("Abstand konnte nicht berechnet werden,\nweil nicht beide Punkte gesetzt wurden!\n");
             	}
@@ -253,8 +261,6 @@ public class MainFrame extends Application {
         abst.setLayoutX(680);
         abst.setLayoutY(65);
         abst.setFont(new Font(16));
-        
-
         
         MenuBar menuBar = new MenuBar();
         	Menu options = new Menu("Optionen");
@@ -314,6 +320,11 @@ public class MainFrame extends Application {
                  		if(iv.getImage() != null) {
                  			iv.setImage(null);
                  			ta.appendText("Bild entfernt!\n");
+                			panel.getChildren().remove(a);
+                			panel.getChildren().remove(b);
+                			panel.getChildren().remove(l);
+                			a.setRadius(0);
+                			b.setRadius(0);
                  		} else {
                  			ta.appendText("Es gibt kein Bild zum entfernen!\n");	
                  		}

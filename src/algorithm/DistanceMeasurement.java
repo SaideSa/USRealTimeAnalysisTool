@@ -8,7 +8,7 @@ import org.opencv.core.Point;
 
 
 
-class DistanceMeasurement {
+public class DistanceMeasurement {
 	
 	DistanceMeasurement c = new DistanceMeasurement();
 
@@ -40,8 +40,15 @@ class DistanceMeasurement {
 
 	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
 
-	 int getDistanceXY(int x1, int y1, int x2, int y2) {
-		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+	 public static int getDistanceXY(int x1, int y1, int x2, int y2) {
+		 double ankathete1 = x2-x1;
+		 double ankathete2 = y2-y1;
+		 
+		// Umrechnung für 1024x768 Bild in mm (Sonde 3S)
+		ankathete1 = ankathete1 * 0.256;
+		ankathete2 = ankathete2 * 0.274;
+		 
+		return (int) Math.sqrt(Math.pow((ankathete1), 2) + Math.pow((ankathete2), 2));
 	}
 	
 	
