@@ -19,17 +19,24 @@ class DistanceMeasurement {
 	// Berechnet anhand der Boxen des Vectors die Entfernung der zwei gesetzten
 	// Boxen
 
-	int getDistanceBox() {
-		Box tempbox1 = (Box) dinge.firstElement();
-		Box tempbox2 = (Box) dinge.lastElement();
-		Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
-		int ankathete1 = tempbox3.y - tempbox1.y;
-		int ankathete2 = tempbox3.x - tempbox2.x;
-		int entfernung = (int) Math.hypot(ankathete1, ankathete2);
-		
-		System.out.println(entfernung);
-		return entfernung;
-	}
+	 public    int getDistanceBox() {
+			Box tempbox1 = (Box) dinge.firstElement();
+			Box tempbox2 = (Box) dinge.lastElement();
+			Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
+			double ankathete1 = tempbox3.y - tempbox1.y;
+			double ankathete2 = tempbox3.x - tempbox2.x;
+			
+			// Umrechnung für 1024x768 Bild in mm (Sonde 3S)
+			ankathete1 = ankathete1 * 0.256;
+			ankathete2 = ankathete2 * 0.274;
+			
+			int entfernung = (int) Math.hypot(ankathete1, ankathete2);
+			
+			
+			System.out.println(entfernung);
+			return entfernung;
+		}
+
 
 	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
 
