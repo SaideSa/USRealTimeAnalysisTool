@@ -8,7 +8,7 @@ import org.opencv.core.Point;
 
 
 
-class DistanceMeasurement {
+public class DistanceMeasurement {
 	
 	//DistanceMeasurement c = new DistanceMeasurement();
 
@@ -102,7 +102,7 @@ class DistanceMeasurement {
 		}
 	}
 
-}
+} /*
 package algorithm;
 
 
@@ -208,4 +208,4 @@ class DistanceMeasurement {
 	}
 
 }
-
+*/
