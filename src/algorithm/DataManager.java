@@ -16,10 +16,7 @@ import javafx.animation.Timeline;
 public class DataManager {
 	DistanceMeasurement c = new DistanceMeasurement();
 	DataProcessor d = new DataProcessor();
-	Timeline timeline = new Timeline();
-	AbstractImageSource imgSrc;
-	ImageView iv = new ImageView();
-	
+		
 	public int getDistanceBox() {
 		return c.getDistanceBox();
 	}
@@ -40,27 +37,18 @@ public class DataManager {
 		c.MouseListenerReleased(evt);
 	}
 	
-	 public void startUpdating(){
-		d.startUpdating();
+	public void openConnection(){
+		d.openConnection();
 	}
 	
-
-	public void stopUpdating() {
-		d.stopUpdating();
-	}
-	
-	public void update() {
-		 d.readBufImg();
+	public void closeConnection(){
+		d.closeConnection();
 	}
 	
 	public BufferedImage readBufImg() {
 		return d.readBufImg();
 	}
 	
-	/*public BufferedImage getNextImage() {
-	return d.getNextImage();
-}*/
-
 }
 	
 

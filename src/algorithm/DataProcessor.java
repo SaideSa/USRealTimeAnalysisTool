@@ -33,43 +33,27 @@ import org.opencv.core.Point;
 
 
 class DataProcessor {
-		DistanceMeasurement c = new DistanceMeasurement();
-		DataProcessor d = new DataProcessor();
-		Timeline timeline = new Timeline();
-		AbstractImageSource imgSrc;
-		ImageView iv = new ImageView();
 	
-		BufferedImage readBufImg() {
-			BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(null); //readMatFrame()
-			return bufImg;
-		}
-				 
-	  
-	public void startUpdating(){
+	DistanceMeasurement c = new DistanceMeasurement();
+	//DataProcessor d = new DataProcessor();
+	AbstractImageSource imgSrc;
+		
+	BufferedImage readBufImg() {
+		Mat mat = imgSrc.getNextMat();
+		BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
+		return bufImg;
+	}
+				  
+	public void openConnection(){
 		imgSrc = new LivestreamSource(0);
-		imgSrc.openConnection();
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.getKeyFrames().add(
-             new KeyFrame(Duration.millis(100),
-                     event -> {
-                         update();
-                     })
-     );
-     timeline.play();
+		imgSrc.openConnection();	
 	}
  
-	public void stopUpdating(){
- 	timeline.stop();
+	public void closeConnection(){
+		imgSrc.closeConnection();
 	}
  
-	private void update() {
-			 System.out.println("Update");
-			 Mat mat = imgSrc.getNextMat();
-			 BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
-			 Image image = SwingFXUtils.toFXImage(bufImg, null);
-			 iv.setImage(image);
-	 }
-
+}
 	
 /*		  
 		 
@@ -152,7 +136,7 @@ class DataProcessor {
 			/**
 			 * The action triggered by pushing the button on the GUI
 			 */
-			@FXML
+	//		@FXML
 	/*		 void startCamera()
 			{
 				new SimpleObjectProperty<>();
