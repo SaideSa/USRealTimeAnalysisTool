@@ -3,8 +3,6 @@ package gui;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-import InputOutput.AbstractImageSource;
-import InputOutput.LivestreamSource;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.*;
@@ -26,9 +24,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import org.opencv.core.Mat;
-import org.opencv.highgui.HighGui;
-import algorithm.DistanceMeasurement;
+import algorithm.DataManager;
 
 public class MainFrame extends Application {
 	
@@ -42,7 +38,7 @@ public class MainFrame extends Application {
 	boolean running = false;
 	
 	Timeline timeline = new Timeline();
-	AbstractImageSource imgSrc;
+	DataManager dMngr = new DataManager();
 	
 	Circle a = new Circle();
 	Circle b = new Circle();
@@ -176,6 +172,18 @@ public class MainFrame extends Application {
 			} 
 		});
         
+        // zeigt Ergebnis d. Abstandberechnung an
+        Text erg = new Text("Ergebnis: (in mm)");
+        erg.setLayoutX(680);
+        erg.setLayoutY(210);
+        erg.setFont(new Font(14));
+        
+        TextField tf = new TextField("");
+        tf.setLayoutX(680);
+        tf.setLayoutY(220);
+        tf.setEditable(false);
+        tf.setPrefWidth(80);
+        
         // Start/Stoppbutton zum Start/Stopp d. Echtzeitdarstellung
         Button startstop = new Button("Start");
         startstop.setLayoutX(20);
@@ -199,6 +207,7 @@ public class MainFrame extends Application {
         			panel.getChildren().remove(l);
         			a.setRadius(0);
         			b.setRadius(0);
+        			tf.setText("");
 					if(freezestatus == true) {
 						freezestatus = false;
 	        			freeze.setText("Freeze");
@@ -207,18 +216,6 @@ public class MainFrame extends Application {
 			} 
 		});
 		   
-        // zeigt Ergebnis d. Abstandberechnung an
-        Text erg = new Text("Ergebnis: (in mm)");
-        erg.setLayoutX(680);
-        erg.setLayoutY(210);
-        erg.setFont(new Font(14));
-        
-        TextField tf = new TextField("");
-        tf.setLayoutX(680);
-        tf.setLayoutY(220);
-        tf.setEditable(false);
-        tf.setPrefWidth(80);
-
 		// Resetbutton, um gesetzte Punkte für die Abstandberechung zu resetten
         Button reset = new Button("Reset");
         reset.setLayoutX(680);
@@ -247,8 +244,8 @@ public class MainFrame extends Application {
         calc.setPrefWidth(80);
         calc.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
-            	if((a.getRadius() == 3)&&(b.getRadius() == 3)) { 
-            		int erg = DistanceMeasurement.getDistanceXY(x1, y1, x2, y2);
+            	if((a.getRadius() == 3)&&(b.getRadius() == 3)) {
+            		int erg = dMngr.getDistanceXY(x1, y1, x2, y2);
             		tf.setText(Integer.toString(erg));
             		ta.appendText("Abstand berechnet!\n");
             	} else {
@@ -312,24 +309,6 @@ public class MainFrame extends Application {
         			} 
         		});
         		save.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
-        		
-        		// Einzelnes Bild auf ImageView kann entfernt werden
-        		MenuItem clear = new MenuItem("Bild entfernen");
-        		 clear.setOnAction(new EventHandler<ActionEvent>() {
-                 	public void handle(ActionEvent e) {
-                 		if(iv.getImage() != null) {
-                 			iv.setImage(null);
-                 			ta.appendText("Bild entfernt!\n");
-                			panel.getChildren().remove(a);
-                			panel.getChildren().remove(b);
-                			panel.getChildren().remove(l);
-                			a.setRadius(0);
-                			b.setRadius(0);
-                 		} else {
-                 			ta.appendText("Es gibt kein Bild zum entfernen!\n");	
-                 		}
-                 	}
-        		 });
         		 
         		// MenuItem zum Laden eines einzelnen USBildes
         		MenuItem load = new MenuItem("Laden");
@@ -355,7 +334,7 @@ public class MainFrame extends Application {
         		MenuItem manual = new MenuItem("Bedienungshilfe");
         		manual.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
         		
-        	options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), saveloc, new SeparatorMenuItem(), clear);
+        	options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), saveloc);
         	help.getItems().add(manual);
         menuBar.getMenus().addAll(options, help);
          
@@ -370,8 +349,7 @@ public class MainFrame extends Application {
     }
     
     private void startUpdating(){
-		imgSrc = new LivestreamSource(0);
-		imgSrc.openConnection();
+    	dMngr.openConnection();
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(100),
@@ -383,13 +361,13 @@ public class MainFrame extends Application {
     }
     
     private void stopUpdating(){
+    	dMngr.closeConnection();
     	timeline.stop();
     }
     
     private void update() {
         System.out.println("Update");
-        Mat mat = imgSrc.getNextMat();
-        BufferedImage bufImg = (BufferedImage) HighGui.toBufferedImage(mat);
+        BufferedImage bufImg = dMngr.readBufImg();
         Image image = SwingFXUtils.toFXImage(bufImg, null);
         iv.setImage(image);
     }
