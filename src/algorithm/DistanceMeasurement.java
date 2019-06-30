@@ -17,7 +17,7 @@ public class DistanceMeasurement {
 	//DistanceMeasurement c = new DistanceMeasurement();
 
 	/**
-	 * creates a Vector by saving the boxes
+	 * creates a vector by saving the boxes
 	 */
 
 	Vector<Box> dinge = new Vector<Box>();
@@ -75,7 +75,7 @@ public class DistanceMeasurement {
 	}
 	
 	 /**
-	  * Only a maximum of 2 points (boxes) can be left-clicked and removed with a right-click
+	  * only a maximum of 2 points (boxes) can be left-clicked and removed with a right-click
 	  * @param evt
 	  */
 	
@@ -102,7 +102,7 @@ public class DistanceMeasurement {
 	}
 
 	/**
-	 * Returns the distance of the pixels of the two boxes as soon as the second is set
+	 * returns the distance of the pixels of the two boxes as soon as the second is set
 	 * @param evt
 	 */
 
