@@ -6,46 +6,59 @@ import java.util.*;
 
 import org.opencv.core.Point;
 
-
+/**
+* this class is responsible for the conversion of the distance
+* 
+* @author team2
+*/
 
 public class DistanceMeasurement {
 	
 	//DistanceMeasurement c = new DistanceMeasurement();
 
-	// Erstellt einen Vector, indem die Boxen gespeichert werden
+	/**
+	 * creates a Vector by saving the boxes
+	 */
 
-	 Vector<Box> dinge = new Vector<Box>();
+	Vector<Box> dinge = new Vector<Box>();
 
-	// Berechnet anhand der Boxen des Vectors die Entfernung der zwei gesetzten
-	// Boxen
+	/**
+	 * calculates the distance of the two set boxes based on the boxes of the vector
+	 */
 
-	 public    int getDistanceBox() {
-			Box tempbox1 = (Box) dinge.firstElement();
-			Box tempbox2 = (Box) dinge.lastElement();
-			Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
-			double ankathete1 = tempbox3.y - tempbox1.y;
-			double ankathete2 = tempbox3.x - tempbox2.x;
+	public int getDistanceBox() {
+	
+		Box tempbox1 = (Box) dinge.firstElement();
+		Box tempbox2 = (Box) dinge.lastElement();
+		Box tempbox3 = new Box(tempbox1.x, tempbox2.y);
+		double ankathete1 = tempbox3.y - tempbox1.y;
+		double ankathete2 = tempbox3.x - tempbox2.x;
 			
-			// Umrechnung für 1024x768 Bild in mm (Sonde 3S)
-			ankathete1 = ankathete1 * 0.256;
-			ankathete2 = ankathete2 * 0.274;
+		// Umrechnung für 1024x768 Bild in mm (Sonde 3S)
+		ankathete1 = ankathete1 * 0.256;
+		ankathete2 = ankathete2 * 0.274;
 			
-			int entfernung = (int) Math.hypot(ankathete1, ankathete2);
+		int entfernung = (int) Math.hypot(ankathete1, ankathete2);
 			
 			
-			System.out.println(entfernung);
+		System.out.println(entfernung);
 			return entfernung;
 		}
 
 
-	// Berechnet die Entfernung zweier Punkte durch Übergabe der Werte
+	/** calculates the distance of two points by passing the values
+	 * 
+	 */
 
 	 int getDistanceXY(int x1, int y1, int x2, int y2) {
 		return (int) Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
 	}
 	
 	
-	//Berechnet die Entfernung anhand zweier Points
+	/**
+	 * calculates the distance of two points
+	 * @return  <code>distance</code>
+	 */
 	
 	 int getDistancePoint(Point a, Point b){
 	    int distance = 0;
@@ -61,12 +74,11 @@ public class DistanceMeasurement {
 	    return distance;
 	}
 	
+	 /**
+	  * Only a maximum of 2 points (boxes) can be left-clicked and removed with a right-click
+	  * @param evt
+	  */
 	
-	
-
-	// Es können nur max 2 Punkte (Boxen) mit Linksklick gesetzt werden und mit
-	// Rechtsklick entfernt werden
-
 	 void MouseListenerPressed(MouseEvent evt) {
 		int button = evt.getButton();
 		if (dinge.size() < 2) {
@@ -89,8 +101,10 @@ public class DistanceMeasurement {
 
 	}
 
-	// Gibt die Entfernung der Pixel der zwei Boxen aus, sobald der zweite gesetzt
-	// wurde
+	/**
+	 * Returns the distance of the pixels of the two boxes as soon as the second is set
+	 * @param evt
+	 */
 
 	 void MouseListenerReleased(MouseEvent evt) {
 
