@@ -19,7 +19,6 @@
 
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCV"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv3.4.6"/>
 
 	<classpathentry kind="output" path="bin"/>
 </classpath>
