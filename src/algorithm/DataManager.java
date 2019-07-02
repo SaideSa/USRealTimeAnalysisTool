@@ -1,17 +1,8 @@
 package algorithm;
 
-
-import InputOutput.AbstractImageSource;
-
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
 import org.opencv.core.Point;
-
-import javafx.scene.image.*;
-import javafx.animation.Timeline;
-
-
 
 public class DataManager {
 	DistanceMeasurement c = new DistanceMeasurement();
@@ -47,6 +38,10 @@ public class DataManager {
 	
 	public BufferedImage readBufImg() {
 		return d.readBufImg();
+	}
+	
+	public void setGeometry() {
+		d.setGeometry();
 	}
 	
 }
