@@ -64,6 +64,8 @@ public class MainFrame extends Application {
     	// Koordianten d. ImageViews & Punktesetzung
     	iv.setLayoutX(20);
         iv.setLayoutY(50);
+        iv.setFitWidth(640);
+        iv.setPreserveRatio(true);
         iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	public void handle(MouseEvent e) {
             	if(e.getButton().equals(MouseButton.PRIMARY)) {
@@ -339,19 +341,29 @@ public class MainFrame extends Application {
         	options.getItems().addAll(save, new SeparatorMenuItem(), load, new SeparatorMenuItem(), saveloc);
         	help.getItems().add(manual);
         menuBar.getMenus().addAll(options, help);
-         
+        
+        //Liste mit Geräten
+        ChoiceBox<Object> cb = new ChoiceBox<Object>();
+        cb.getItems().addAll("Webcam", new Separator(), "externes Gerät");
+        cb.getSelectionModel().selectFirst();
+        cb.setLayoutX(230);
+        cb.setLayoutY(540);
+        cb.setPrefWidth(105);
+        //cb.getSelectionModel().selectedItemProperty().addListener(
+        	
+        Text device = new Text("Gerät auswählen:");
+        device.setLayoutX(230);
+        device.setLayoutY(530);
+        device.setFont(new Font(14));
+        
         // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
         bp.setTop(menuBar);
         bp.setCenter(panel);
-        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency);
+        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency, cb, device);
         s.setResizable(false);
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1120, 600));    
-        s.show();
-        
-        
-        //Liste mit Geräten
-        
+        s.show(); 
     }
     
     private void setGeraet(int x) {
@@ -360,7 +372,7 @@ public class MainFrame extends Application {
     }
     
     private void startUpdating(int x){
-    	dMngr.openConnection(x);
+    	dMngr.openConnectionint(x);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(100),
