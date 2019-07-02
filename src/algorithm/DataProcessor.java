@@ -19,8 +19,8 @@ class DataProcessor {
 		return bufImg;
 	}
 				  
-	public void openConnection(){
-		imgSrc = new LivestreamSource(0);
+	public void openConnection(int x){
+		imgSrc = new LivestreamSource(x);
 		imgSrc.openConnection();	
 	}
  

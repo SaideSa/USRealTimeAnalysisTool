@@ -28,8 +28,8 @@ public class DataManager {
 		c.MouseListenerReleased(evt);
 	}
 	
-	public void openConnection(){
-		d.openConnection();
+	public void openConnectionint (int x){
+		d.openConnection(x);
 	}
 	
 	public void closeConnection(){

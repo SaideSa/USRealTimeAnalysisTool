@@ -28,6 +28,8 @@ import algorithm.DataManager;
 
 public class MainFrame extends Application {
 	
+	int geraet;
+	
 	ImageView iv = new ImageView();
 	Pane panel = new Pane(iv);
 	BorderPane bp = new BorderPane();
@@ -162,7 +164,7 @@ public class MainFrame extends Application {
         			ta.appendText("Fenster aufgetaut!\n");
         			freezestatus = false;
         			freeze.setText("Freeze");
-        			startUpdating();
+        			startUpdating(geraet);
         		}
 
         		} else {
@@ -195,7 +197,7 @@ public class MainFrame extends Application {
 					startstop.setText("Stop");
 					ta.appendText("Echtzeitdarstellung gestartet!\n");
 					running = true;
-					startUpdating();
+					startUpdating(geraet);
 				} else {
 					startstop.setText("Start");
 					ta.appendText("Echtzeitdarstellung gestoppt!\n");
@@ -346,10 +348,19 @@ public class MainFrame extends Application {
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1120, 600));    
         s.show();
+        
+        
+        //Liste mit Geräten
+        
     }
     
-    private void startUpdating(){
-    	dMngr.openConnection();
+    private void setGeraet(int x) {
+    	geraet = x;
+    	
+    }
+    
+    private void startUpdating(int x){
+    	dMngr.openConnection(x);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(100),
