@@ -188,6 +188,15 @@ public class MainFrame extends Application {
         tf.setEditable(false);
         tf.setPrefWidth(80);
         
+        //Liste mit Geräten
+        ChoiceBox<Object> cb = new ChoiceBox<Object>();
+        cb.getItems().addAll("Webcam", new Separator(), "externes Gerät");
+        cb.getSelectionModel().selectFirst();
+        cb.setLayoutX(230);
+        cb.setLayoutY(540);
+        cb.setPrefWidth(105);
+        //cb.getSelectionModel().selectedItemProperty().addListener(
+        
         // Start/Stoppbutton zum Start/Stopp d. Echtzeitdarstellung
         Button startstop = new Button("Start");
         startstop.setLayoutX(20);
@@ -196,6 +205,11 @@ public class MainFrame extends Application {
 		startstop.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				if(running == false) {
+					if(cb.getValue()=="Webcam") {
+						setGeraet(0);
+					}else if(cb.getValue()=="externes Gerät") {
+						setGeraet(1);
+					}
 					startstop.setText("Stop");
 					ta.appendText("Echtzeitdarstellung gestartet!\n");
 					running = true;
@@ -342,14 +356,7 @@ public class MainFrame extends Application {
         	help.getItems().add(manual);
         menuBar.getMenus().addAll(options, help);
         
-        //Liste mit Geräten
-        ChoiceBox<Object> cb = new ChoiceBox<Object>();
-        cb.getItems().addAll("Webcam", new Separator(), "externes Gerät");
-        cb.getSelectionModel().selectFirst();
-        cb.setLayoutX(230);
-        cb.setLayoutY(540);
-        cb.setPrefWidth(105);
-        //cb.getSelectionModel().selectedItemProperty().addListener(
+        
         	
         Text device = new Text("Gerät auswählen:");
         device.setLayoutX(230);
@@ -372,7 +379,7 @@ public class MainFrame extends Application {
     }
     
     private void startUpdating(int x){
-    	dMngr.openConnectionint(x);
+    	dMngr.openConnection(x);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(100),

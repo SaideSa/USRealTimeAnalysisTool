@@ -28,7 +28,7 @@ public class DataManager {
 		c.MouseListenerReleased(evt);
 	}
 	
-	public void openConnectionint (int x){
+	public void openConnection (int x){
 		d.openConnection(x);
 	}
 	
