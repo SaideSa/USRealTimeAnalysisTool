@@ -67,6 +67,7 @@ public class MainFrame extends Application {
     	iv.setLayoutX(20);
         iv.setLayoutY(50);
         iv.setFitWidth(640);
+        iv.setFitHeight(500);
         iv.setPreserveRatio(true);
         iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	public void handle(MouseEvent e) {
