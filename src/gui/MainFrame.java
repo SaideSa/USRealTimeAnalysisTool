@@ -201,11 +201,11 @@ public class MainFrame extends Application {
         
         //Liste mit Ultraschallköpfen
         ChoiceBox<Object> cb_kopf = new ChoiceBox<Object>();
-        cb.getItems().addAll("3S", new Separator(), "11L");
-        cb.getSelectionModel().selectFirst();
-        cb.setLayoutX(340);
-        cb.setLayoutY(540);
-        cb.setPrefWidth(105);
+        cb_kopf.getItems().addAll("3S", new Separator(), "11L");
+        cb_kopf.getSelectionModel().selectFirst();
+        cb_kopf.setLayoutX(340);
+        cb_kopf.setLayoutY(540);
+        cb_kopf.setPrefWidth(105);
         
         // Start/Stoppbutton zum Start/Stopp d. Echtzeitdarstellung
         Button startstop = new Button("Start");
