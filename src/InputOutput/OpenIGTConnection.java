@@ -23,6 +23,7 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	private ImageMessage imgMsg;
 	private String name;
 	private byte[] imgData;
+
 	
 	
 	/**
@@ -36,11 +37,11 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 			client = new GenericIGTLinkClient(ip, port);
 
 			client.addIOpenIgtOnPacket(this);
-
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
+
 
 	}
 
@@ -49,9 +50,12 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 		setImageMessage(image);
 		
 		try {
+			
 			image.UnpackBody();
 			
 			setImageDataByte(image.getImageData());
+	
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -65,13 +69,13 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	}
 
 	public void setImageMessage(ImageMessage img) {
-
 		imgMsg = img;
 	}
 	
 	public void setImageDataByte(byte[] imgData) {
 		this.imgData = imgData;
 	}
+	
 	
 	public byte[] getImageDataByte() {
 
@@ -87,7 +91,18 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 		return client.isConnected();
 	}
 	
-	
+//	public long getWidth() {
+//		return dimensions[0];	
+//	}
+//
+//	public long getHeight() {
+//		return dimensions[1];	
+//	}
+//	
+//	public long getType() {
+//		return dimensions[2];	
+//	}
+//	
 	/**
 	 * The methods below are not used during a connection over MITK
 	 */

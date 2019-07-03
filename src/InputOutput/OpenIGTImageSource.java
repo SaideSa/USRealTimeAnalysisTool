@@ -19,32 +19,48 @@ public class OpenIGTImageSource extends AbstractImageSource {
 	private OpenIGTConnection igtConnection;
 	private ImageMessage imgMsg;
 	private byte[] imgData;
+	private long[] dimensions;
+	private int rows = 0;
+	private int cols = 0 ;
+	private int type = 1;
+	
 	
 	
 	public OpenIGTImageSource() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		frameMatrix = new Mat(480, 640, 1);
+
 	}
 	
 	public OpenIGTImageSource(String ipAddress, int port) {
 		ip = ipAddress;
 		this.port = port;
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		frameMatrix = new Mat(480, 640, 1);
+
 		
 	}
 
 	public boolean openConnection() {
+		
 		igtConnection = new OpenIGTConnection(ip, port);
 		isConnected = true;
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		imgMsg = igtConnection.getImageMessage();
+		rows = (int) imgMsg.getDimensions()[1];
+		cols = (int) imgMsg.getDimensions()[0];
+		type = (int) imgMsg.getDimensions()[2];
+		
+		frameMatrix = new Mat (rows, cols, type);
+		
 		return isConnected;
 	}
 
+	
+	
 	public boolean closeConnection() {
 		igtConnection.stop();
 		isConnected = false;
@@ -59,10 +75,11 @@ public class OpenIGTImageSource extends AbstractImageSource {
 
 	public Mat getNextMat() {
 		
-		
+//		System.out.println(rows + " " + cols);
 		imgData = igtConnection.getImageDataByte();
-
+		
 		frameMatrix.put(0, 0, imgData);
+	
 		return frameMatrix;
 	}
 	
@@ -70,6 +87,19 @@ public class OpenIGTImageSource extends AbstractImageSource {
 
 	public boolean checkConnection() {
 		isConnected = igtConnection.isConnected();
+		
 		return isConnected;
+	}
+	
+	public long getImageScalarType() {
+		return imgMsg.getScalarType();
+	}
+	
+	public double[] getSpacing() {
+		return imgMsg.getSpacing();
+	}
+	
+	public double[] getOrigin() {
+		return imgMsg.getOrigin();
 	}
 }
