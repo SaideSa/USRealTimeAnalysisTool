@@ -12,8 +12,8 @@ public class DataManager {
 		return c.getDistanceBox();
 	}
 	
-	public int getDistanceXY(int x1, int y1, int x2, int y2) {
-		return c.getDistanceXY(x1, y1, x2, y2);
+	public int getDistanceXY(int x1, int y1, int x2, int y2, double umrechnungX, double umrechnungY) {
+		return c.getDistanceXY(x1, y1, x2, y2, umrechnungX, umrechnungY);
 	}
 	
 	public int getDistancePoint(Point a, Point b) {

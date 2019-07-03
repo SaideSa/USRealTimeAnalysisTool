@@ -273,6 +273,11 @@ public class MainFrame extends Application {
         calc.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
             	if((a.getRadius() == 3)&&(b.getRadius() == 3)) {
+            		if(cb_kopf.getValue()=="3S") {
+            			setKopf(0.256, 0.274);
+            		}else if(cb_kopf.getValue()=="11L") {
+            			setKopf(0.080, 0.080);
+            		}
             		int erg = dMngr.getDistanceXY(x1, y1, x2, y2, umrechnungX, umrechnungY);
             		tf.setText(Integer.toString(erg));
             		ta.appendText("Abstand berechnet!\n");
@@ -387,6 +392,12 @@ public class MainFrame extends Application {
     	geraet = x;
     	
     }
+    
+    private void setKopf(double x, double y) {
+    	umrechnungX = x;
+    	umrechnungY=y;
+    	
+   }
     
     private void startUpdating(int x){
     	dMngr.openConnection(x);
