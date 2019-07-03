@@ -50,11 +50,11 @@ public class DistanceMeasurement {
 	 * 
 	 */
 
-	 int getDistanceXY(int x1, int y1, int x2, int y2) {
+	 int getDistanceXY(int x1, int y1, int x2, int y2, double umrechnungX, double umrechnungY) {
 		 double ankathete1 = x2 - x1;
 		 double ankathete2 = y2 - y1;
-		 ankathete1 = ankathete1 * 0.256;
-		 ankathete2 = ankathete2 * 0.274;
+		 ankathete1 = ankathete1 * umrechnungX;
+		 ankathete2 = ankathete2 * umrechnungY;
 		 
 		return (int) Math.sqrt(Math.pow((ankathete1), 2) + Math.pow((ankathete2), 2));
 		

@@ -50,6 +50,8 @@ public class MainFrame extends Application {
 	int y1;
 	int x2;
 	int y2;
+	double umrechnungX;
+	double umrechnungY;
 		
     public void start(Stage s) throws Exception {
     	
@@ -197,6 +199,14 @@ public class MainFrame extends Application {
         cb.setPrefWidth(105);
         //cb.getSelectionModel().selectedItemProperty().addListener(
         
+        //Liste mit Ultraschallköpfen
+        ChoiceBox<Object> cb_kopf = new ChoiceBox<Object>();
+        cb.getItems().addAll("3S", new Separator(), "11L");
+        cb.getSelectionModel().selectFirst();
+        cb.setLayoutX(340);
+        cb.setLayoutY(540);
+        cb.setPrefWidth(105);
+        
         // Start/Stoppbutton zum Start/Stopp d. Echtzeitdarstellung
         Button startstop = new Button("Start");
         startstop.setLayoutX(20);
@@ -263,7 +273,7 @@ public class MainFrame extends Application {
         calc.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent e) {
             	if((a.getRadius() == 3)&&(b.getRadius() == 3)) {
-            		int erg = dMngr.getDistanceXY(x1, y1, x2, y2);
+            		int erg = dMngr.getDistanceXY(x1, y1, x2, y2, umrechnungX, umrechnungY);
             		tf.setText(Integer.toString(erg));
             		ta.appendText("Abstand berechnet!\n");
             	} else {
