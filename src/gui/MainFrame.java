@@ -381,7 +381,7 @@ public class MainFrame extends Application {
         // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
         bp.setTop(menuBar);
         bp.setCenter(panel);
-        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency, cb, device);
+        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency, cb, cb_kopf, device);
         s.setResizable(false);
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1120, 600));    
