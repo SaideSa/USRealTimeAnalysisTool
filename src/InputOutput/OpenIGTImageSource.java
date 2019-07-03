@@ -8,6 +8,11 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 
+/**
+ * 
+ * @author team3
+ *
+ */
 public class OpenIGTImageSource extends AbstractImageSource {
 	private String ip = "127.0.0.1";
 	private int port = 18944;
@@ -18,6 +23,7 @@ public class OpenIGTImageSource extends AbstractImageSource {
 	
 	public OpenIGTImageSource() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		//frameMatrix = new Mat(768, 1024, 1);
 		frameMatrix = new Mat(480, 640, 1);
 	}
 	
@@ -25,7 +31,8 @@ public class OpenIGTImageSource extends AbstractImageSource {
 		ip = ipAddress;
 		this.port = port;
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		frameMatrix = new Mat(480, 640, 1);
+		frameMatrix = new Mat(768, 1024, 1);
+		//frameMatrix = new Mat(480, 640, 1);
 		
 	}
 
@@ -58,7 +65,6 @@ public class OpenIGTImageSource extends AbstractImageSource {
 		imgData = igtConnection.getImageDataByte();
 
 		frameMatrix.put(0, 0, imgData);
-	
 		return frameMatrix;
 	}
 	

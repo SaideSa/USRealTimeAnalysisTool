@@ -70,7 +70,6 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	}
 	
 	public void setImageDataByte(byte[] imgData) {
-
 		this.imgData = imgData;
 	}
 	
