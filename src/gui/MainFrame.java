@@ -117,7 +117,7 @@ public class MainFrame extends Application {
         output.setLayoutY(65);
         output.setFont(new Font(16));
         
-        //zeigt an, ob es eine Verbindung zum USGerät gibt (provisorisch)
+        // zeigt an, ob es eine Verbindung zum USGerät gibt (provisorisch)
         Rectangle connection = new Rectangle(30,30);
         connection.setLayoutX(20);
         connection.setLayoutY(10);
