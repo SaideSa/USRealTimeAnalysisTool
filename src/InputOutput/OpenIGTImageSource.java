@@ -23,8 +23,7 @@ public class OpenIGTImageSource extends AbstractImageSource {
 	
 	public OpenIGTImageSource() {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		//frameMatrix = new Mat(768, 1024, 1);
-		frameMatrix = new Mat(480, 640, 1);
+		frameMatrix = new Mat(768, 1024, 1);
 	}
 	
 	public OpenIGTImageSource(String ipAddress, int port) {
@@ -32,7 +31,6 @@ public class OpenIGTImageSource extends AbstractImageSource {
 		this.port = port;
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		frameMatrix = new Mat(768, 1024, 1);
-		//frameMatrix = new Mat(480, 640, 1);
 		
 	}
 
