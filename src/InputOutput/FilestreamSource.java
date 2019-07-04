@@ -9,7 +9,7 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
 /**
- * Provides the footage from a file with these formats: mp4, avi, mkv, mov, 3GP, mpg, 
+ * provides the footage from a file with these formats: mp4, avi, mkv, mov, 3GP, mpg, 
  * jpg and png
  * 
  * @author Team 3
