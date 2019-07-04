@@ -9,7 +9,7 @@ import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 /**
- * provides the livestream footage from a webcam, ultrasound device or any other
+ * Provides the livestream footage from a webcam, ultrasound device or any other
  * suitable devices.
  * 
  * @author Team 3

@@ -1,16 +1,17 @@
 package InputOutput;
 
+
+
+import org.opencv.core.Mat;
+
 /**
- * builds an interface to other teams and enables to get a Matrix,
+ * Builds an interface to other teams and enables to get a Matrix,
  * establishes a connection to the device and disconnects the 
  * connection
  * 
  * @author team3
  * 
  */
-
-import org.opencv.core.Mat;
-
 public abstract class AbstractImageSource {
 	
 
