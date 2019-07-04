@@ -26,11 +26,7 @@ public class TestFrameThread extends Thread {
 	boolean saveVideoOn;
 	SaveImageSource save;
 	boolean threadSleep = false;
-	int count = 0;
-	Timestamp timestamp = new Timestamp();
-	long time1;
-	long time2;
-	long timeRes;
+
 	
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
@@ -41,7 +37,6 @@ public class TestFrameThread extends Thread {
 	public void run() {
 		if (imgSrc.openConnection()) {
 			while (imgSrc.isConnected) {
-				time1 =  System.currentTimeMillis();
 				mat = imgSrc.getNextMat();
 	
 				if(threadSleep == true) {
@@ -60,14 +55,8 @@ public class TestFrameThread extends Thread {
 					save.writeMat(mat);
 				}
 
-				if(count == 100) {
-					time2 = System.currentTimeMillis();
-					timeRes = time2 - time1;
-					System.out.println(timeRes);
-				}
-//				System.out.println(time1 + " " +count + " " );
+
 				panel.repaint();
-				count++;
 			}
 		}
 	}

@@ -73,12 +73,6 @@ public class FilestreamSource extends AbstractImageSource {
 
 	}
 
-	// public BufferedImage readBufImg() {
-	//
-	// bufImg = (BufferedImage) HighGui.toBufferedImage(getNextMat());
-	// return bufImg;
-	//
-	// }
 
 	/**
 	 * sets <code>isConnected = false</code>
@@ -95,6 +89,10 @@ public class FilestreamSource extends AbstractImageSource {
 		return exit;
 	}
 
+	/** 
+	 * returns the frame total number of the selected file.
+	 * @return <code>frameTotalNumber</code>
+	 */
 	public int getFrameNumber() {
 		return frameTotalNumber;
 	}
