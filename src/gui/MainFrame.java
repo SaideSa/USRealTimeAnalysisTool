@@ -379,10 +379,16 @@ public class MainFrame extends Application {
         device.setLayoutY(530);
         device.setFont(new Font(14));
         
+    	
+        Text head = new Text("Kopf auswählen:");
+        head.setLayoutX(340);
+        head.setLayoutY(530);
+        head.setFont(new Font(14));
+        
         // Panel & Menubar auf Borderpane setzten, Elemente auf Panel setzten, Fenster anzeigen
         bp.setTop(menuBar);
         bp.setCenter(panel);
-        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency, cb, cb_kopf, device);
+        panel.getChildren().addAll(startstop, reset, calc, erg, freeze, ta, output, abst, tf, connection, connecttxt, fps, latency, cb, cb_kopf, device,head);
         s.setResizable(false);
         s.setTitle("USRealTimeAnalysisTool");        
         s.setScene(new Scene(bp, 1120, 600));    

@@ -10,7 +10,6 @@ import InputOutput.LivestreamSource;
 class DataProcessor {
 	
 	DistanceMeasurement c = new DistanceMeasurement();
-	//DataProcessor d = new DataProcessor();
 	AbstractImageSource imgSrc;
 		
 	BufferedImage readBufImg() {
@@ -27,10 +26,4 @@ class DataProcessor {
 	public void closeConnection(){
 		imgSrc.closeConnection();
 	}
-
-	public void setGeometry() {
-		
-		
-	}
- 
 } 
