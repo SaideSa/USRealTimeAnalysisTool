@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"InputOutput","l":"AbstractImageSource"},{"p":"InputOutput","l":"FilestreamSource"},{"p":"InputOutput","l":"LivestreamSource"},{"p":"InputOutput","l":"OpenIGTConnection"},{"p":"InputOutput","l":"OpenIGTImageSource"}]
