@@ -48,7 +48,6 @@ public class FilestreamSource extends AbstractImageSource {
 			System.out.println("found VideoSource " + vc.toString());
 			isConnected = true;
 			frameTotalNumber = (int) vc.get(Videoio.CAP_PROP_FRAME_COUNT);
-//			System.out.println(Videoio.CAP_PROP_FOURCC + "++++++++");
 
 		} else {
 			System.out.println("!!! Did not connect to camera !!!");

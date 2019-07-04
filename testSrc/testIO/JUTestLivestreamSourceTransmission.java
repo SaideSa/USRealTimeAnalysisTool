@@ -14,7 +14,7 @@ import InputOutput.LivestreamSource;
  * @author sahin
  *
  */
-class TestLivestreamSourceTransmission {
+class JUTestLivestreamSourceTransmission {
 	LivestreamSource livestream;
 	
 	

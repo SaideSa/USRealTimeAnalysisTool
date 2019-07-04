@@ -120,7 +120,7 @@ public class TestFrame extends JFrame implements ActionListener {
 				FilestreamSource fileStream = new FilestreamSource(loadFile);
 				imgSrc = fileStream;
 				thread = new TestFrameThread(videoPanel, imgSrc);
-
+				thread.threadSleep = true;
 			}
 		}
 		
@@ -128,6 +128,7 @@ public class TestFrame extends JFrame implements ActionListener {
 			if (imgSrc.closeConnection()) {
 				System.out.println("Connection stopped!");
 			}
+			thread.threadSleep = false;
 		}
 
 		if (src == saveVideo) {
