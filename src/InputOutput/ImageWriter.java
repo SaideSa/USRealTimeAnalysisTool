@@ -25,7 +25,7 @@ import org.opencv.videoio.Videoio;
  * @author team3
  *
  */
-public class SaveImageSource {
+public class ImageWriter {
 	
 	private VideoWriter writer;
 	public String path;
