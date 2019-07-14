@@ -21,7 +21,7 @@ import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 /**
- * Class for saving the imported frames as Mat Objects (OpenCV). For the saving process the VideoWriter class from the OpenCV library is used.
+ * saves the imported frames as Mat Objects (OpenCV). For the saving process the VideoWriter class from the OpenCV library is used.
  * @author team3
  *
  */

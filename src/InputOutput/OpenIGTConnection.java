@@ -13,7 +13,7 @@ import com.neuronrobotics.sdk.common.Log;
 import Jama.Matrix;
 
 /**
- * This class is for a connection based on OpenIGTLink. As a prerequisite MITK v2016.11 has to run in the background. 
+ * builds a connection based on OpenIGTLink. As a prerequisite MITK v2016.11 has to run in the background. 
  * The connection is established by using the online stream. 
  * @author team3
  *
