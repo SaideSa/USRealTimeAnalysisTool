@@ -97,5 +97,14 @@ public class LivestreamSource extends AbstractImageSource {
 
 		return exit;
 	}
+	
+	/**
+	 * returns the connection status
+	 * @return <code>isConnected</code>
+	 */
+	public boolean checkConnection() {
+		isConnected = vc.isOpened();
+		return isConnected;
+	}
 
 }

@@ -96,4 +96,13 @@ public class FilestreamSource extends AbstractImageSource {
 	public int getFrameNumber() {
 		return frameTotalNumber;
 	}
+	
+	/**
+	 * returns the connection status
+	 * @return <code>isConnected</code>
+	 */
+	public boolean checkConnection() {
+		isConnected = vc.isOpened();
+		return isConnected;
+	}
 }

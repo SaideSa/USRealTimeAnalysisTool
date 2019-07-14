@@ -38,5 +38,10 @@ public abstract class AbstractImageSource {
 	 */
 	public abstract boolean closeConnection();
 
+	/**
+	 * checks the connection
+	 * @return <code>isConnected</code>
+	 */
+	public abstract boolean checkConnection();
 
 }
