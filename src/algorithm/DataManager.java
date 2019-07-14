@@ -21,14 +21,14 @@ public class DataManager {
 	}
 	
 	/**
-	 * 
+	 * get distance and convert in pixel in mm 
 	 * @param x1 x-coordinate first point
 	 * @param y1 y-coordinate first point
 	 * @param x2 x-coordinate second point
 	 * @param y2 y-coordinate second point
 	 * @param umrechnungX 
 	 * @param umrechnungY
-	 * @return
+	 * @return Ergebnis in mm 
 	 */
 	public int getDistanceXY(int x1, int y1, int x2, int y2, double umrechnungX, double umrechnungY) {
 		return c.getDistanceXY(x1, y1, x2, y2, umrechnungX, umrechnungY);
