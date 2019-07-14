@@ -1,6 +1,5 @@
 package InputOutput;
 
-import java.util.ArrayList;
 
 import org.medcare.igtl.messages.ImageMessage;
 import org.medcare.igtl.network.GenericIGTLinkClient;
@@ -8,7 +7,6 @@ import org.medcare.igtl.network.IOpenIgtPacketListener;
 import org.medcare.igtl.util.Status;
 
 import com.neuronrobotics.sdk.addons.kinematics.math.TransformNR;
-import com.neuronrobotics.sdk.common.Log;
 
 import Jama.Matrix;
 
@@ -84,6 +82,7 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	 * @return ImageMessage
 	 */
 	public ImageMessage getImageMessage() {
+		
 		return imgMsg;
 	}
 
@@ -106,7 +105,7 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	 * @return It returns the image data as a byte[]
 	 */
 	public byte[] getImageDataByte() {
-
+		
 		return imgData;
 	}
 
@@ -124,6 +123,7 @@ public class OpenIGTConnection implements IOpenIgtPacketListener {
 	 * @return <code>isConnected</code>
 	 */
 	public boolean isConnected() {
+		
 		return client.isConnected();
 	}
 

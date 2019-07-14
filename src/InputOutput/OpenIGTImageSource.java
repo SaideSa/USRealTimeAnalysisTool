@@ -20,7 +20,6 @@ public class OpenIGTImageSource extends AbstractImageSource {
 	private OpenIGTConnection igtConnection;
 	private ImageMessage imgMsg;
 	private byte[] imgData;
-	private long[] dimensions;
 	private int rows;
 	private int cols;
 	private int type;

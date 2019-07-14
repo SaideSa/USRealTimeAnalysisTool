@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 
-import com.sun.jmx.snmp.Timestamp;
 
 import InputOutput.AbstractImageSource;
 import InputOutput.SaveImageSource;

@@ -6,18 +6,14 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
 
 import org.opencv.core.Mat;
-import org.opencv.highgui.HighGui;
 
 import InputOutput.*;
 
@@ -57,7 +53,6 @@ public class TestFrame extends JFrame implements ActionListener {
 		main.setLayout(new BorderLayout());
 		main.add(videoPanel, BorderLayout.CENTER);
 
-		/* Panel with three Buttons: startLive, startFile, stop */
 		buttonPanel.setLayout(new FlowLayout());
 		startLive.setSize(100, 20);
 		startFile.setSize(100, 20);

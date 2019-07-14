@@ -1,24 +1,15 @@
 package InputOutput;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
 import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
-import org.opencv.videoio.Videoio;
+
 
 /**
  * Class for saving the imported frames as Mat Objects (OpenCV). For the saving process the VideoWriter class from the OpenCV library is used.
@@ -31,8 +22,7 @@ public class SaveImageSource {
 	public String path;
 	private Size size;
 	private int fps;
-	private int count =0;
-	
+
 	/**
 	 * This method needs a filename, frames-per-second and width & height of the matrix for creating an object of VideoWriter.
 	 * @param path

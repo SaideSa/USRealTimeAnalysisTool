@@ -1,7 +1,5 @@
 package InputOutput;
 
-import java.awt.image.BufferedImage;
-
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
@@ -18,7 +16,6 @@ import org.opencv.videoio.Videoio;
 public class FilestreamSource extends AbstractImageSource {
 
 	private VideoCapture vc;
-	public BufferedImage bufImg = null;
 	private String path;
 	private int frameTotalNumber;
 
@@ -93,7 +90,7 @@ public class FilestreamSource extends AbstractImageSource {
 	 * returns the frame total number of the selected file.
 	 * @return <code>frameTotalNumber</code>
 	 */
-	public int getFrameNumber() {
+	public int getTotalFrameNumber() {
 		return frameTotalNumber;
 	}
 }

@@ -2,8 +2,6 @@ package testIO;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
 import InputOutput.LivestreamSource;
 
 /**
