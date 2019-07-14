@@ -5,7 +5,7 @@ package InputOutput;
 import org.opencv.core.Mat;
 
 /**
- * Builds an interface to other teams and enables to get a Matrix,
+ * builds an interface to other teams and enables to get a Matrix,
  * establishes a connection to the device and disconnects the 
  * connection
  * 

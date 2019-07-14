@@ -7,7 +7,7 @@ import org.opencv.highgui.HighGui;
 
 
 import InputOutput.AbstractImageSource;
-import InputOutput.SaveImageSource;
+import InputOutput.ImageWriter;
 
 
 /**
@@ -23,14 +23,14 @@ public class TestFrameThread extends Thread {
 	BufferedImage bufImg;
 	TestPanel panel;
 	boolean saveVideoOn;
-	SaveImageSource save;
+	ImageWriter save;
 	boolean threadSleep = false;
 
 	
 	public TestFrameThread(TestPanel tp, AbstractImageSource src) {
 		imgSrc = src;
 		panel = tp;
-		save = new SaveImageSource();
+		save = new ImageWriter();
 		start();
 	}
 	public void run() {

@@ -18,7 +18,6 @@ import org.opencv.videoio.Videoio;
 public class LivestreamSource extends AbstractImageSource {
 
 	private VideoCapture vc;
-	// public BufferedImage bufImg = null;
 	private int deviceID = 0;
 
 	/**
@@ -53,10 +52,6 @@ public class LivestreamSource extends AbstractImageSource {
 			isConnected = false;
 		}
 
-			int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
-		    vc.set(Videoio.CAP_PROP_FOURCC, fourcc);
-//		    vc.set(Videoio.CAP_PROP_FRAME_WIDTH, CAP_FRAME_WIDTH);
-//		    vc.set(Videoio.CAP_PROP_FRAME_HEIGHT, CAP_FRAME_HEIGHT);
 		return isConnected;
 	}
 
@@ -78,11 +73,6 @@ public class LivestreamSource extends AbstractImageSource {
 
 	}
 
-	// public BufferedImage readBufImg() {
-	// bufImg = (BufferedImage) HighGui.toBufferedImage(getNextMat());
-	// return bufImg;
-	//
-	// }
 	/**
 	 * closes connection to the device and sets <code>isConnected = false</code>
 	 * 

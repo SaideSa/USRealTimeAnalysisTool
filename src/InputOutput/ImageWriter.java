@@ -12,11 +12,11 @@ import org.opencv.videoio.VideoWriter;
 
 
 /**
- * Class for saving the imported frames as Mat Objects (OpenCV). For the saving process the VideoWriter class from the OpenCV library is used.
+ * saves the imported frames as Mat Objects (OpenCV). For the saving process the VideoWriter class from the OpenCV library is used.
  * @author team3
  *
  */
-public class SaveImageSource {
+public class ImageWriter {
 	
 	private VideoWriter writer;
 	public String path;

@@ -9,8 +9,9 @@ import org.opencv.core.Mat;
 
 
 /**
- * This class is inherited from AbstractImageSource and provides the basic functionalities for the application like opening and closing the connection, and an image converted to a Mat object from OpenCV. 
+ * provides the basic functionalities for the application like opening and closing the connection, and an image converted to a Mat object from OpenCV. 
  * The class OpenIGTConnection is needed here for establishing the connection. 
+ * 
  * @author team3
  *
  */
